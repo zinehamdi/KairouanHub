@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KairouanHub - Coming Soon</title>
+  <link rel="icon" href="../public/favicon.ico">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f5e9d8 0%, #d4af37 100%);
+      font-family: 'Tajawal', 'Arial', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .floating-window {
+      background: rgba(255,255,255,0.95);
+      border-radius: 2rem;
+      box-shadow: 0 8px 32px rgba(212,175,55,0.25);
+      padding: 3rem 2.5rem;
+      text-align: center;
+      position: relative;
+      animation: float 2s infinite ease-in-out alternate;
+      border: 3px solid #d4af37;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-20px); }
+    }
+    .coming-soon {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #b4882a;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+    .arabic {
+      font-size: 2rem;
+      color: #8b6647;
+      font-family: 'Tajawal', 'Arial', sans-serif;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-window">
+    <div class="coming-soon">Coming Soon</div>
+    <div class="arabic">انشاءالله</div>
+  </div>
+</body>
+</html>

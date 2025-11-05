@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    /* Root Variables for Kairouan Theme - LIGHTER PALETTE */
+    :root {
+        --kairouan-beige: #F5F1E8;
+        --kairouan-brown: #8B6647;
+        --kairouan-gold: #D4AF37;
+        --kairouan-amber: #E28E0C;
+        --kairouan-black: #2D2621;
+        --kairouan-limestone: #FAF8F3;
+        --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+        @apply antialiased font-sans text-brand-dark;
+        font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Arabic Typography Enhancement */
+    [lang="ar"], .rtl {
+        @apply font-arabic;
+        letter-spacing: 0.01em;
+    }
+
+    /* Smooth Scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Improved Text Readability */
+    h1, h2, h3, h4, h5, h6 {
+        @apply text-brand-dark font-bold;
+        letter-spacing: -0.02em;
+    }
+    
+    p {
+        @apply text-brand-dark/80 leading-relaxed;
+    }
+}
+
+@layer components {
+    /* Kairouan Arch Shape */
+    .kairouan-arch {
+        @apply relative;
+        clip-path: path('M 0 100 L 0 40 Q 0 0, 40 0 L 60 0 Q 100 0, 100 40 L 100 100 Z');
+    }
+
+    /* Islamic Geometric Pattern Overlay */
+    .geometric-overlay {
+        position: relative;
+    }
+    
+    .geometric-overlay::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: 
+            repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.03) 10px, rgba(212, 175, 55, 0.03) 20px),
+            repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(107, 62, 38, 0.02) 10px, rgba(107, 62, 38, 0.02) 20px);
+        pointer-events: none;
+    }
+
+    /* Kufic Border Pattern */
+    .kufic-border {
+        @apply relative;
+        border-image: repeating-linear-gradient(
+            90deg,
+            var(--kairouan-gold) 0px,
+            var(--kairouan-gold) 10px,
+            transparent 10px,
+            transparent 20px,
+            var(--kairouan-gold) 20px,
+            var(--kairouan-gold) 22px,
+            transparent 22px,
+            transparent 32px
+        ) 1;
+    }
+
+    /* Golden Light Effect */
+    .golden-glow {
+        @apply relative;
+        box-shadow: 
+            0 0 20px rgba(212, 175, 55, 0.2),
+            inset 0 0 20px rgba(212, 175, 55, 0.1);
+    }
+
+    /* Engraved Brass Texture */
+    .brass-texture {
+        background: linear-gradient(135deg, 
+            #B87333 0%, 
+            #D4AF37 25%, 
+            #B87333 50%, 
+            #D4AF37 75%, 
+            #B87333 100%);
+        background-size: 200% 200%;
+    }
+
+    /* Mosaic Tile Effect */
+    .mosaic-tile {
+        @apply relative overflow-hidden;
+        background: 
+            linear-gradient(45deg, rgba(212, 175, 55, 0.1) 25%, transparent 25%),
+            linear-gradient(-45deg, rgba(212, 175, 55, 0.1) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, rgba(212, 175, 55, 0.1) 75%),
+            linear-gradient(-45deg, transparent 75%, rgba(212, 175, 55, 0.1) 75%);
+        background-size: 20px 20px;
+        background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    }
+
+    /* Premium Card Styles */
+    .kairouan-card {
+        @apply bg-white dark:bg-kairouan-black rounded-kairouan shadow-kairouan;
+        @apply border border-kairouan-beige/20 overflow-hidden;
+        @apply transition-all duration-300 hover:shadow-gold;
+        background-image: 
+            linear-gradient(to bottom, transparent 0%, rgba(212, 175, 55, 0.02) 100%),
+            var(--tw-gradient-to);
+    }
+
+    /* Heritage Button */
+    .btn-kairouan {
+        @apply px-6 py-3 rounded-kairouan font-medium;
+        @apply bg-gradient-to-r from-kairouan-brown to-kairouan-gold;
+        @apply text-white shadow-brass;
+        @apply transition-all duration-300;
+        @apply hover:shadow-gold hover:scale-105;
+        @apply active:scale-95;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-kairouan::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .btn-kairouan:hover::before {
+        left: 100%;
+    }
+
+    /* Secondary Button */
+    .btn-outline-kairouan {
+        @apply px-6 py-3 rounded-kairouan font-medium;
+        @apply border-2 border-kairouan-gold text-kairouan-brown dark:text-kairouan-gold;
+        @apply bg-transparent hover:bg-kairouan-gold hover:text-white;
+        @apply transition-all duration-300;
+    }
+
+    /* Decorative Divider */
+    .kairouan-divider {
+        @apply relative h-px bg-gradient-to-r from-transparent via-kairouan-gold to-transparent;
+        @apply my-8;
+    }
+
+    .kairouan-divider::before,
+    .kairouan-divider::after {
+        content: '✦';
+        @apply absolute top-1/2 -translate-y-1/2 text-kairouan-gold text-xs;
+    }
+
+    .kairouan-divider::before {
+        left: -8px;
+    }
+
+    .kairouan-divider::after {
+        right: -8px;
+    }
+
+    /* Ornamental Header */
+    .kairouan-header {
+        @apply text-3xl md:text-4xl lg:text-5xl font-bold;
+        @apply bg-gradient-to-r from-kairouan-brown via-kairouan-gold to-kairouan-brown;
+        @apply bg-clip-text text-transparent;
+        @apply mb-4;
+        font-family: 'Amiri', serif;
+        letter-spacing: 0.02em;
+    }
+
+    /* Text Shadow for Depth */
+    .text-shadow-gold {
+        text-shadow: 
+            0 2px 4px rgba(212, 175, 55, 0.2),
+            0 4px 8px rgba(107, 62, 38, 0.1);
+    }
+
+    /* Calligraphic Accent */
+    .calligraphic-accent {
+        @apply relative inline-block;
+    }
+
+    .calligraphic-accent::after {
+        content: '';
+        @apply absolute -bottom-2 left-0 right-0 h-0.5;
+        @apply bg-gradient-to-r from-transparent via-kairouan-gold to-transparent;
+    }
+
+    /* Hero Section with Background - LIGHTER VERSION WITH FIXED IMAGE */
+    .hero-kairouan {
+        @apply relative min-h-screen flex items-center justify-center;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .hero-kairouan::before {
+        content: '';
+        @apply absolute inset-0 opacity-10;
+        background-image: 
+            repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.03) 10px, rgba(212, 175, 55, 0.03) 20px),
+            repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(107, 62, 38, 0.02) 10px, rgba(107, 62, 38, 0.02) 20px);
+        pointer-events: none;
+    }
+
+    /* Premium Input Fields */
+    .input-kairouan {
+        @apply w-full px-4 py-3 rounded-kairouan;
+        @apply border-2 border-kairouan-beige focus:border-kairouan-gold;
+        @apply bg-white dark:bg-kairouan-black;
+        @apply text-kairouan-black dark:text-kairouan-limestone;
+        @apply transition-all duration-300;
+        @apply focus:ring-4 focus:ring-kairouan-gold/20;
+        @apply placeholder:text-kairouan-olive/50;
+    }
+
+    /* Badge/Tag Styles */
+    .badge-kairouan {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+        @apply bg-kairouan-gold/10 text-kairouan-brown;
+        @apply border border-kairouan-gold/30;
+    }
+
+    /* Navigation Enhancement */
+    .nav-kairouan {
+        @apply backdrop-blur-md bg-white/90 dark:bg-kairouan-black/90;
+        @apply border-b border-kairouan-beige/20;
+        @apply shadow-kairouan;
+    }
+
+    /* Footer with Pattern */
+    .footer-kairouan {
+        @apply bg-kairouan-brown text-kairouan-beige;
+        @apply relative overflow-hidden;
+        background-image: 
+            linear-gradient(to top, rgba(26, 23, 20, 0.5), transparent),
+            var(--tw-gradient-to);
+    }
+
+    .footer-kairouan::before {
+        content: '';
+        @apply absolute inset-0 mosaic-tile opacity-20;
+    }
+}
+
+@layer utilities {
+    /* Text Gradient Utilities */
+    .text-gradient-gold {
+        @apply bg-gradient-to-r from-kairouan-gold via-kairouan-amber to-kairouan-gold;
+        @apply bg-clip-text text-transparent;
+        background-size: 200% auto;
+        animation: shimmer 3s linear infinite;
+    }
+
+    /* Hover Lift Effect */
+    .hover-lift {
+        @apply transition-transform duration-300;
+    }
+
+    .hover-lift:hover {
+        @apply -translate-y-1;
+    }
+
+    /* Fade In Animation */
+    .fade-in {
+        animation: fadeIn 0.6s ease-in;
+    }
+
+    /* Slide Up Animation */
+    .slide-up {
+        animation: slideUp 0.6s ease-out;
+    }
+
+    /* Stagger Animation for Lists */
+    .stagger-item {
+        opacity: 1;
+        animation: slideUp 0.5s ease-out forwards;
+    }
+
+    .stagger-item:nth-child(1) { animation-delay: 0.1s; }
+    .stagger-item:nth-child(2) { animation-delay: 0.2s; }
+    .stagger-item:nth-child(3) { animation-delay: 0.3s; }
+    .stagger-item:nth-child(4) { animation-delay: 0.4s; }
+    .stagger-item:nth-child(5) { animation-delay: 0.5s; }
+
+    /* Responsive Arabic/Latin Text Sizing */
+    @media (min-width: 768px) {
+        [lang="ar"] .responsive-text {
+            font-size: 1.1em;
+        }
+    }
+}

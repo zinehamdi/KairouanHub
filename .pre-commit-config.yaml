@@ -1,0 +1,23 @@
+repos:
+  - repo: https://github.com/pre-commit/mirrors-phpcs
+    rev: v3.7.2
+    hooks:
+      - id: phpcs
+        args: ["--standard=PSR12"]
+  - repo: local
+    hooks:
+      - id: pint
+        name: Laravel Pint
+        entry: composer pint -- --test
+        language: system
+        types: [php]
+      - id: phpstan
+        name: PHPStan
+        entry: vendor/bin/phpstan analyse
+        language: system
+        types: [php]
+      - id: pest
+        name: Pest
+        entry: vendor/bin/pest --group=fast
+        language: system
+        types: [php]

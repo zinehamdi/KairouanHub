@@ -1,0 +1,1 @@
+{{-- This view is not used, healthz returns JSON. --}}
