@@ -35,6 +35,9 @@ class EloquentProviderProfileRepository implements ProviderProfileRepositoryInte
 
     public function paginatePublic(array $filters, int $perPage = 12): LengthAwarePaginator
     {
+        // Filter out empty values to prevent issues with scopes (e.g. rating="" -> 0.0 -> excludes NULL)
+        $filters = array_filter($filters, function($v) { return $v !== null && $v !== ''; });
+
         $q = ProviderProfile::query()->approved();
         $q->city($filters['city'] ?? null)
           ->badge($filters['badge'] ?? null)
