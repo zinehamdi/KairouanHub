@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <pattern id="geometric" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <!-- 8-pointed star pattern inspired by Kairouan mosque -->
+      <g opacity="0.15">
+        <path d="M50,10 L55,35 L80,35 L60,50 L70,75 L50,60 L30,75 L40,50 L20,35 L45,35 Z" 
+              fill="#D4AF37" stroke="#C19A6B" stroke-width="0.5"/>
+        <circle cx="50" cy="50" r="8" fill="none" stroke="#D4AF37" stroke-width="1"/>
+        <circle cx="50" cy="50" r="15" fill="none" stroke="#C19A6B" stroke-width="0.5" stroke-dasharray="2,2"/>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="200" height="200" fill="url(#geometric)"/>
+</svg>

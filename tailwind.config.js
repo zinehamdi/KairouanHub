@@ -21,33 +21,24 @@ export default {
                 arabic: ['Amiri', 'Tajawal'],
             },
             colors: {
-                // Kairouan Heritage Palette - LIGHTER & MORE READABLE
-                kairouan: {
-                    beige: '#F5F1E8',      // Lighter limestone
-                    brown: '#8B6647',      // Softer brown
-                    gold: '#D4AF37',       // Keep gold
-                    amber: '#E28E0C',      // Keep amber
-                    black: '#2D2621',      // Softer black
-                    limestone: '#FAF8F3',  // Very light cream
-                    terracotta: '#D4735C', // Softer terracotta
-                    sandstone: '#E8DCC0',  // Light sand
-                    copper: '#C89160',     // Lighter copper
-                    olive: '#A08970',      // Lighter olive
+                // Mediterranean Color Palette
+                mediterranean: {
+                    terracotta: '#E07A5F',
+                    blue: '#3D5A80',
+                    sand: '#F4A261',
+                    'deep-blue': '#264653',
+                    'light-blue': '#81B9D4',
+                    cream: '#F2F3F4',
                 },
                 brand: {
-                    DEFAULT: '#8B6647',    // Softer Kairouan Brown
-                    light: '#F5F1E8',      // Light Beige
-                    dark: '#2D2621',       // Softer Deep Black
+                    DEFAULT: '#264653',    // Deep Blue
+                    light: '#F2F3F4',      // Soft Cream
+                    dark: '#264653',       // Deep Blue
                 },
                 accent: {
-                    DEFAULT: '#D4AF37',    // Gold
-                    amber: '#E28E0C',      // Amber/Orange
-                    copper: '#C89160',     // Lighter copper
-                },
-                neutral: {
-                    DEFAULT: '#A08970',    // Lighter Olive
-                    light: '#FAF8F3',      // Very light
-                    dark: '#8B6647',       // Softer Brown
+                    DEFAULT: '#E07A5F',    // Terracotta
+                    sand: '#F4A261',       // Warm Sand
+                    blue: '#3D5A80',       // Mediterranean Blue
                 },
             },
             backgroundImage: {

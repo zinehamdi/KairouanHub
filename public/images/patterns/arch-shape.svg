@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="archGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#C19A6B;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Moorish horseshoe arch -->
+  <path d="M 50 300 L 50 150 Q 50 50, 100 30 Q 150 10, 200 10 Q 250 10, 300 30 Q 350 50, 350 150 L 350 300 Z" 
+        fill="url(#archGradient)" 
+        stroke="#D4AF37" 
+        stroke-width="2"/>
+  
+  <!-- Decorative inner arch -->
+  <path d="M 80 300 L 80 160 Q 80 80, 120 60 Q 160 40, 200 40 Q 240 40, 280 60 Q 320 80, 320 160 L 320 300" 
+        fill="none" 
+        stroke="#D4AF37" 
+        stroke-width="1" 
+        stroke-dasharray="5,5"
+        opacity="0.5"/>
+</svg>

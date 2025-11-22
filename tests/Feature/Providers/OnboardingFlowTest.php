@@ -23,18 +23,20 @@ class OnboardingFlowTest extends TestCase
         $this->actingAs($user);
 
         // Step 1: create profile
+        $category = \App\Models\Category::factory()->create();
         $response = $this->post(route('provider.store'), [
+            'category_id' => $category->id,
             'display_name' => 'My Studio',
             'city' => 'Kairouan',
             'bio' => 'We do great work',
-            'skills' => ['php','laravel'],
-            'cities' => ['Kairouan','Sousse'],
+            'skills' => ['php', 'laravel'],
+            'cities' => ['Kairouan', 'Sousse'],
             'social' => ['facebook' => 'https://facebook.com/test']
         ]);
         $response->assertRedirect(route('provider.services'));
-        $this->assertDatabaseHas('provider_profiles',[ 'user_id' => $user->id, 'display_name' => 'My Studio', 'status' => 'pending']);
+        $this->assertDatabaseHas('provider_profiles', ['user_id' => $user->id, 'display_name' => 'My Studio', 'status' => 'pending']);
 
-        $profile = ProviderProfile::where('user_id',$user->id)->first();
+        $profile = ProviderProfile::where('user_id', $user->id)->first();
 
         // Step 2: attach services
         $services = Service::factory()->count(2)->create();
@@ -59,7 +61,7 @@ class OnboardingFlowTest extends TestCase
         ]);
         $response3->assertRedirect(route('provider.dashboard'));
         $this->assertNotEmpty($profile->fresh()->photos_json);
-    $this->assertTrue(Storage::disk('public')->exists($profile->fresh()->photos_json[0]));
+        $this->assertTrue(Storage::disk('public')->exists($profile->fresh()->photos_json[0]));
 
         // Dashboard accessible
         $dash = $this->get(route('provider.dashboard'));
@@ -73,12 +75,14 @@ class OnboardingFlowTest extends TestCase
         // roles seeded in base TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
+        $category = \App\Models\Category::factory()->create();
         $resp = $this->post(route('provider.store'), [
+            'category_id' => $category->id,
             'display_name' => 'Fast Provider',
             'city' => 'Tunis'
         ]);
         $resp->assertRedirect(route('provider.services'));
-        $this->assertDatabaseHas('provider_profiles',[ 'user_id' => $user->id, 'status' => 'approved']);
+        $this->assertDatabaseHas('provider_profiles', ['user_id' => $user->id, 'status' => 'approved']);
     }
 
     public function test_cannot_access_steps_without_profile(): void
