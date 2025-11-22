@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProviderOnboardingController;
@@ -14,6 +15,9 @@ use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use Spatie\Permission\Middleware\RoleMiddleware;
 
 
+
+// Locale switching
+Route::get('/locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
