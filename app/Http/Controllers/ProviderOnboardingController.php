@@ -32,7 +32,7 @@ class ProviderOnboardingController extends Controller
 
     public function start()
     {
-        $this->authorize('create', ProviderProfile::class);
+        // Allow users to view the form even if they have a profile (they can update it)
         $auto = config('appsettings.providers.auto_approve');
         $categories = \App\Models\Category::orderBy('position')->get(['id', 'name', 'description']);
         return view('provider_onboarding.step1_info', compact('auto', 'categories'));
@@ -40,8 +40,8 @@ class ProviderOnboardingController extends Controller
 
     public function store(StoreProfileRequest $request)
     {
-        $this->authorize('create', ProviderProfile::class);
         $data = $request->validated();
+        
         // Normalize arrays -> *_json columns expected
         $payload = [
             'category_id' => $data['category_id'],
@@ -54,7 +54,18 @@ class ProviderOnboardingController extends Controller
             'social_json' => $data['social'] ?? [],
             'status' => config('appsettings.providers.auto_approve') ? 'approved' : 'pending',
         ];
-        $profile = $this->repo->createForUser(Auth::id(), $payload);
+        
+        // Check if user already has a profile
+        $existingProfile = $this->repo->findByUserId(Auth::id());
+        
+        if ($existingProfile) {
+            // Update existing profile
+            $profile = $this->repo->update($existingProfile, $payload);
+        } else {
+            // Create new profile
+            $profile = $this->repo->createForUser(Auth::id(), $payload);
+        }
+        
         if($profile->status === 'pending') {
             $user = Auth::user();
             Notification::send($user, new ProviderOnboardingSubmitted($profile));
