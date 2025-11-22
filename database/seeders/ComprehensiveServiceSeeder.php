@@ -145,8 +145,8 @@ class ComprehensiveServiceSeeder extends Seeder
                     ],
                     [
                         'name_ar' => $serviceData['name_ar'],
-                        'description' => $serviceData['name'],
-                        'price_min' => $serviceData['price'],
+                        'slug' => \Illuminate\Support\Str::slug($serviceData['name']),
+                        'summary' => $serviceData['name'],
                         'is_active' => true
                     ]
                 );
