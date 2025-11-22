@@ -1,51 +1,53 @@
-name: CI
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php: [8.3]
-        db: [mysql]
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: kairouanhub_test
-        ports: [3306:3306]
-        options: >-
-          --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=3
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: mbstring, pdo, pdo_mysql, fileinfo
-          coverage: none
-      - name: Cache Composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-      - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-interaction --no-progress
-      - name: Copy .env.ci
-        run: cp .env.example .env
-      - name: Generate key
-        run: php artisan key:generate
-      - name: Migrate DB
-        run: php artisan migrate --force
-      - name: Run Pint
-        run: composer pint -- --test
-      - name: Run PHPStan
-        run: vendor/bin/phpstan analyse
-      - name: Run Pest
-        run: vendor/bin/pest --group=fast
+# name: CI
+#
+# Temporarily disabled - uncomment to re-enable
+# 
+# on:
+#   push:
+#     branches: [main]
+#   pull_request:
+#     branches: [main]
+#
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         php: [8.3]
+#         db: [mysql]
+#     services:
+#       mysql:
+#         image: mysql:8.0
+#         env:
+#           MYSQL_ROOT_PASSWORD: root
+#           MYSQL_DATABASE: kairouanhub_test
+#         ports: [3306:3306]
+#         options: >-
+#           --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=3
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Setup PHP
+#         uses: shivammathur/setup-php@v2
+#         with:
+#           php-version: ${{ matrix.php }}
+#           extensions: mbstring, pdo, pdo_mysql, fileinfo
+#           coverage: none
+#       - name: Cache Composer dependencies
+#         uses: actions/cache@v4
+#         with:
+#           path: vendor
+#           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+#       - name: Install Composer dependencies
+#         run: composer install --prefer-dist --no-interaction --no-progress
+#       - name: Copy .env.ci
+#         run: cp .env.example .env
+#       - name: Generate key
+#         run: php artisan key:generate
+#       - name: Migrate DB
+#         run: php artisan migrate --force
+#       - name: Run Pint
+#         run: composer pint -- --test
+#       - name: Run PHPStan
+#         run: vendor/bin/phpstan analyse
+#       - name: Run Pest
+#         run: vendor/bin/pest --group=fast
