@@ -42,6 +42,14 @@ class ProviderOnboardingController extends Controller
     {
         $data = $request->validated();
         
+        // Check if user already has a profile
+        $existingProfile = $this->repo->findByUserId(Auth::id());
+        
+        if ($existingProfile) {
+            // User already has a profile, skip to services step
+            return redirect()->route('provider.services')->with('info', 'Profile already exists. You can update your services.');
+        }
+        
         // Normalize arrays -> *_json columns expected
         $payload = [
             'category_id' => $data['category_id'],
@@ -55,16 +63,8 @@ class ProviderOnboardingController extends Controller
             'status' => config('appsettings.providers.auto_approve') ? 'approved' : 'pending',
         ];
         
-        // Check if user already has a profile
-        $existingProfile = $this->repo->findByUserId(Auth::id());
-        
-        if ($existingProfile) {
-            // Update existing profile
-            $profile = $this->repo->update($existingProfile, $payload);
-        } else {
-            // Create new profile
-            $profile = $this->repo->createForUser(Auth::id(), $payload);
-        }
+        // Create new profile
+        $profile = $this->repo->createForUser(Auth::id(), $payload);
         
         if($profile->status === 'pending') {
             $user = Auth::user();
