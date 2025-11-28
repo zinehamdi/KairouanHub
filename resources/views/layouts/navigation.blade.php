@@ -135,7 +135,7 @@
                                 @csrf
 
                                 <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
-                                                                                this.closest('form').submit();">
+                                                                                    this.closest('form').submit();">
                                     🚪 {{ __('nav.logout') }}
                                 </x-dropdown-link>
                             </form>
@@ -186,6 +186,9 @@
                 {{ __('nav.providers') }}
             </x-responsive-nav-link>
             @auth
+                <x-responsive-nav-link :href="route('requests.index')" :active="request()->routeIs('requests.index')">
+                    {{ __('Browse Requests') }}
+                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     {{ __('nav.dashboard') }}
                 </x-responsive-nav-link>
@@ -237,7 +240,7 @@
                         @csrf
 
                         <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
-                                                                        this.closest('form').submit();">
+                                                                            this.closest('form').submit();">
                             🚪 {{ __('nav.logout') }}
                         </x-responsive-nav-link>
                     </form>
