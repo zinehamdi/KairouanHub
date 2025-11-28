@@ -1,4 +1,5 @@
-<nav x-data="{ open: false }" class="sticky top-0 z-50 border-b border-white/20 shadow-lg" style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
+<nav x-data="{ open: false }" class="sticky top-0 z-50 border-b border-white/20 shadow-lg"
+    style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
@@ -56,9 +57,9 @@
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                                {{ __('nav.become_provider') }}
-                            </a>
+                            </svg>
+                            {{ __('nav.become_provider') }}
+                        </a>
                     @endauth
                 </div>
             </div>
@@ -134,7 +135,7 @@
                                 @csrf
 
                                 <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
-                                                                            this.closest('form').submit();">
+                                                                                this.closest('form').submit();">
                                     🚪 {{ __('nav.logout') }}
                                 </x-dropdown-link>
                             </form>
@@ -147,7 +148,8 @@
                             {{ __('nav.login') }}
                         </a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="text-sm px-6 py-2.5 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-lg shadow-md transition-all duration-200 hover:shadow-lg backdrop-blur-sm border border-white/30">
+                            <a href="{{ route('register') }}"
+                                class="text-sm px-6 py-2.5 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-lg shadow-md transition-all duration-200 hover:shadow-lg backdrop-blur-sm border border-white/30">
                                 {{ __('nav.register') }}
                             </a>
                         @endif
@@ -190,6 +192,27 @@
             @endauth
         </div>
 
+        <!-- Language Switcher (Mobile) -->
+        <div class="pt-4 pb-3 border-t border-white/20 bg-gradient-to-b from-transparent to-black/10">
+            <div class="px-4">
+                <div class="text-sm font-medium text-white/70 mb-2">{{ __('Language') }}</div>
+                <div class="space-y-1">
+                    <a href="{{ route('lang.switch', 'ar') }}"
+                        class="flex items-center px-3 py-2 rounded-lg text-white transition @if(app()->getLocale() === 'ar') bg-white/20 font-semibold @else hover:bg-white/10 @endif">
+                        <span class="mr-2 rtl:ml-2 rtl:mr-0">🇹🇳</span> العربية
+                    </a>
+                    <a href="{{ route('lang.switch', 'en') }}"
+                        class="flex items-center px-3 py-2 rounded-lg text-white transition @if(app()->getLocale() === 'en') bg-white/20 font-semibold @else hover:bg-white/10 @endif">
+                        <span class="mr-2 rtl:ml-2 rtl:mr-0">🇬🇧</span> English
+                    </a>
+                    <a href="{{ route('lang.switch', 'fr') }}"
+                        class="flex items-center px-3 py-2 rounded-lg text-white transition @if(app()->getLocale() === 'fr') bg-white/20 font-semibold @else hover:bg-white/10 @endif">
+                        <span class="mr-2 rtl:ml-2 rtl:mr-0">🇫🇷</span> Français
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <!-- Responsive Settings Options -->
         @auth
             <div class="pt-4 pb-1 border-t border-white/20 bg-gradient-to-b from-transparent to-black/10">
@@ -214,7 +237,7 @@
                         @csrf
 
                         <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
-                                                                    this.closest('form').submit();">
+                                                                        this.closest('form').submit();">
                             🚪 {{ __('nav.logout') }}
                         </x-responsive-nav-link>
                     </form>
