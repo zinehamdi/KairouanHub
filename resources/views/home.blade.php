@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@section('title_prefix', __('seo.home_title', ['app_name' => config('app.name')]))
+@section('title_suffix', __('seo.home_subtitle'))
+@section('description', __('seo.home_description', ['app_name' => config('app.name')]))
+@section('og_title', __('seo.home_title', ['app_name' => config('app.name')]))
+@section('og_description', __('seo.home_description', ['app_name' => config('app.name')]))
     <!-- Hero Section - Mediterranean Style -->
     <div class="hero-mediterranean relative bg-cover bg-center bg-no-repeat min-h-screen flex items-center justify-center"
         style="background-image: linear-gradient(to bottom, rgba(38, 70, 83, 0.50), rgba(61, 90, 128, 0.45)), url('{{ asset('images/kairouan-background.jpg') }}');">
@@ -63,20 +68,15 @@
             <!-- Main Heading -->
             <h1 class="text-5xl md:text-7xl font-heading font-bold mb-6 leading-tight tracking-tight slide-up">
                 <span class="block text-white drop-shadow-lg">
-                    KairouanHub
+                    {{ __('home.hero_title') }}
                 </span>
                 <span class="block text-3xl md:text-4xl text-white/90 mt-2" style="font-family: 'Amiri', serif;">
-                    منصة الخدمات المحلية
+                    {{ __('home.hero_subtitle') }}
                 </span>
             </h1>
 
             <p class="text-xl md:text-2xl mb-4 text-white/95 drop-shadow-md slide-up" style="animation-delay: 0.2s;">
-                القيروان، روح التراث ومستقبل التقنية
-            </p>
-
-            <p class="text-base md:text-lg mb-10 text-white/80 font-light drop-shadow-md slide-up"
-                style="animation-delay: 0.3s;">
-                Kairouan, the soul of heritage and the future of tech
+                {{ __('home.hero_description') }}
             </p>
 
             <!-- Search Bar -->
@@ -86,14 +86,15 @@
                         <div class="flex-1">
                             <input type="text" name="search"
                                 class="w-full px-6 py-4 bg-transparent border-0 focus:ring-0 text-gray-800 placeholder:text-gray-500 text-lg font-medium"
-                                placeholder="ابحث عن خدمة..." />
+                                placeholder="{{ __('home.search_placeholder') }}" />
                         </div>
                         <button type="submit" class="btn-mediterranean whitespace-nowrap">
-                            <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 inline-block mr-2 rtl:ml-2 rtl:mr-0" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
-                            ابحث
+                            {{ __('home.search_button') }}
                         </button>
                     </div>
                 </form>
@@ -102,25 +103,28 @@
             <!-- Quick Links -->
             <div class="flex flex-wrap justify-center gap-4 slide-up" style="animation-delay: 0.5s;">
                 <a href="{{ route('services.index') }}" class="btn-terracotta">
-                    <svg class="w-5 h-5 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 inline-block ml-2 rtl:ml-2 rtl:mr-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
-                    تصفح الخدمات
+                    {{ __('home.browse_services') }}
                 </a>
                 <a href="{{ route('providers.index') }}" class="btn-outline-mediterranean">
-                    <svg class="w-5 h-5 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 inline-block ml-2 rtl:ml-2 rtl:mr-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
-                    ابحث عن مقدمي الخدمات
+                    {{ __('home.find_providers') }}
                 </a>
                 @guest
                     <a href="{{ route('register') }}" class="btn-mediterranean">
-                        <svg class="w-5 h-5 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 inline-block ml-2 rtl:ml-2 rtl:mr-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                         </svg>
-                        كن مقدم خدمة
+                        {{ __('home.become_provider') }}
                     </a>
                 @endguest
             </div>
@@ -135,72 +139,72 @@
     </div>
 
     <!-- Features Section -->
-    <section class="py-24 bg-soft-cream">
+    <section class="py-24 bg-kairouan-warm-cream">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-20">
                 <h2 class="text-4xl md:text-5xl font-heading font-bold mb-4 fade-in"
                     style="font-family: 'Amiri', serif; color: var(--color-deep-blue);">
-                    لماذا تختار قيروان هب؟
+                    {{ __('home.why_choose_us') }}
                 </h2>
-                <div class="w-24 h-1 bg-terracotta mx-auto rounded-full"></div>
+                <div class="w-24 h-1 bg-accent-DEFAULT mx-auto rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Feature 1 -->
                 <div class="card-mediterranean p-8 text-center stagger-item">
                     <div
-                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-terracotta-gradient mb-6 shadow-soft">
+                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-accent-DEFAULT to-accent-amber mb-6 shadow-soft">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-deep-blue mb-3">
-                        موثوق
+                    <h3 class="text-2xl font-bold text-brand-dark mb-3">
+                        {{ __('home.feature_trust') }}
                     </h3>
                     <p class="text-gray-600 text-lg leading-relaxed">
-                        مقدمو خدمات معتمدون ومراجعات حقيقية من عملاء سابقين
+                        {{ __('home.feature_trust_desc') }}
                     </p>
                 </div>
 
                 <!-- Feature 2 -->
                 <div class="card-mediterranean p-8 text-center stagger-item">
                     <div
-                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-terracotta-gradient mb-6 shadow-soft">
+                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-accent-DEFAULT to-accent-amber mb-6 shadow-soft">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-deep-blue mb-3">
-                        سريع
+                    <h3 class="text-2xl font-bold text-brand-dark mb-3">
+                        {{ __('home.feature_fast') }}
                     </h3>
                     <p class="text-gray-600 text-lg leading-relaxed">
-                        احصل على عروض الأسعار من مقدمي الخدمات في دقائق معدودة
+                        {{ __('home.feature_fast_desc') }}
                     </p>
                 </div>
 
                 <!-- Feature 3 -->
                 <div class="card-mediterranean p-8 text-center stagger-item">
                     <div
-                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-terracotta-gradient mb-6 shadow-soft">
+                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-accent-DEFAULT to-accent-amber mb-6 shadow-soft">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-deep-blue mb-3">
-                        أسعار عادلة
+                    <h3 class="text-2xl font-bold text-brand-dark mb-3">
+                        {{ __('home.feature_affordable') }}
                     </h3>
                     <p class="text-gray-600 text-lg leading-relaxed">
-                        قارن الأسعار من عدة مقدمي خدمات واختر الأفضل لك
+                        {{ __('home.feature_affordable_desc') }}
                     </p>
                 </div>
 
                 <!-- Feature 4 -->
                 <div class="card-mediterranean p-8 text-center stagger-item">
                     <div
-                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-terracotta-gradient mb-6 shadow-soft">
+                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-accent-DEFAULT to-accent-amber mb-6 shadow-soft">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -208,11 +212,11 @@
                                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-deep-blue mb-3">
-                        محلي
+                    <h3 class="text-2xl font-bold text-brand-dark mb-3">
+                        {{ __('home.feature_local') }}
                     </h3>
                     <p class="text-gray-600 text-lg leading-relaxed">
-                        مقدمو خدمات محليون في القيروان يعرفون احتياجاتك
+                        {{ __('home.feature_local_desc') }}
                     </p>
                 </div>
             </div>
@@ -223,52 +227,52 @@
     <section class="py-20 bg-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-heading font-bold text-deep-blue mb-4 fade-in">
-                    كيف يعمل؟
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-brand-dark mb-4 fade-in">
+                    {{ __('home.how_it_works') }}
                 </h2>
-                <div class="w-24 h-1 bg-terracotta mx-auto rounded-full"></div>
+                <div class="w-24 h-1 bg-accent-DEFAULT mx-auto rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
                 <!-- Step 1 -->
                 <div class="text-center stagger-item">
                     <div
-                        class="w-24 h-24 rounded-full bg-terracotta-gradient flex items-center justify-center text-white text-4xl font-bold shadow-soft mx-auto mb-6">
+                        class="w-24 h-24 rounded-full bg-gradient-to-r from-accent-DEFAULT to-accent-amber flex items-center justify-center text-white text-4xl font-bold shadow-soft mx-auto mb-6">
                         1
                     </div>
-                    <h3 class="text-2xl font-bold text-deep-blue mb-4">
-                        اطلب خدمة
+                    <h3 class="text-2xl font-bold text-brand-dark mb-4">
+                        {{ __('home.step1_title') }}
                     </h3>
                     <p class="text-gray-600 text-lg leading-relaxed">
-                        أخبرنا بالخدمة التي تحتاجها وتفاصيل مشروعك
+                        {{ __('home.step1_desc') }}
                     </p>
                 </div>
 
                 <!-- Step 2 -->
                 <div class="text-center stagger-item">
                     <div
-                        class="w-24 h-24 rounded-full bg-terracotta-gradient flex items-center justify-center text-white text-4xl font-bold shadow-soft mx-auto mb-6">
+                        class="w-24 h-24 rounded-full bg-gradient-to-r from-accent-DEFAULT to-accent-amber flex items-center justify-center text-white text-4xl font-bold shadow-soft mx-auto mb-6">
                         2
                     </div>
-                    <h3 class="text-2xl font-bold text-deep-blue mb-4">
-                        استلم العروض
+                    <h3 class="text-2xl font-bold text-brand-dark mb-4">
+                        {{ __('home.step2_title') }}
                     </h3>
                     <p class="text-gray-600 text-lg leading-relaxed">
-                        احصل على عروض أسعار من مقدمي خدمات محترفين
+                        {{ __('home.step2_desc') }}
                     </p>
                 </div>
 
                 <!-- Step 3 -->
                 <div class="text-center stagger-item">
                     <div
-                        class="w-24 h-24 rounded-full bg-terracotta-gradient flex items-center justify-center text-white text-4xl font-bold shadow-soft mx-auto mb-6">
+                        class="w-24 h-24 rounded-full bg-gradient-to-r from-accent-DEFAULT to-accent-amber flex items-center justify-center text-white text-4xl font-bold shadow-soft mx-auto mb-6">
                         3
                     </div>
-                    <h3 class="text-2xl font-bold text-deep-blue mb-4">
-                        اختر الأفضل
+                    <h3 class="text-2xl font-bold text-brand-dark mb-4">
+                        {{ __('home.step3_title') }}
                     </h3>
                     <p class="text-gray-600 text-lg leading-relaxed">
-                        قارن العروض واختر مقدم الخدمة الأنسب لك
+                        {{ __('home.step3_desc') }}
                     </p>
                 </div>
             </div>
@@ -279,36 +283,27 @@
     <section class="py-20 bg-blue-gradient">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg fade-in">
-                ابدأ الآن
+                {{ __('home.cta_title') }}
             </h2>
             <p class="text-white/90 text-xl mb-10 max-w-2xl mx-auto fade-in font-medium">
-                انضم إلى مجتمع القيروان الرقمي واحصل على أفضل الخدمات
+                {{ __('home.cta_description') }}
             </p>
             <div class="flex flex-wrap justify-center gap-6 fade-in">
                 <a href="{{ route('requests.create') }}"
                     class="px-10 py-5 bg-white text-mediterranean-blue rounded-xl font-bold text-lg shadow-2xl hover:shadow-soft-lg hover:scale-105 transition-all duration-300">
-                    اطلب خدمة
+                    {{ __('home.request_service') }}
                 </a>
                 @guest
                     <a href="{{ route('register') }}"
                         class="px-10 py-5 bg-transparent border-2 border-white text-white rounded-xl font-bold text-lg hover:bg-white hover:text-mediterranean-blue transition-all duration-300 shadow-lg">
-                        انضم كمقدم خدمة
+                        {{ __('home.join_as_provider') }}
                     </a>
                 @endguest
             </div>
         </div>
     </section>
 
-    <!-- Floating window invitation -->
-    <div id="joinWindow"
-        style="position: fixed; top: 30px; left: 30px; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); width: 350px; max-height: 90vh; overflow: hidden; z-index: 9999; font-family: 'Cairo', sans-serif;">
-        <div style="background:#14532d; color:white; padding:10px 15px; font-weight:600;">
-            🌿 نحن بصدد التحسين ونبحث عن موهوبين معنا
-        </div>
-        <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSdg3cAyniKqcmqFgshHI3AhiIcQYrmEA519LyZwy6upZLTIMQ/viewform?usp=header"
-            style="width:100%; height:400px; border:none;"></iframe>
-        <button onclick="document.getElementById('joinWindow').style.display='none'"
-            style="width:100%; background:#d97706; color:white; border:none; padding:10px; cursor:pointer;">إغلاق</button>
-    </div>
+    <!-- Chatbot Widget -->
+    <x-chatbot-widget />
+    
 @endsection

@@ -21,24 +21,29 @@ export default {
                 arabic: ['Amiri', 'Tajawal'],
             },
             colors: {
-                // Mediterranean Color Palette
-                mediterranean: {
-                    terracotta: '#E07A5F',
-                    blue: '#3D5A80',
-                    sand: '#F4A261',
-                    'deep-blue': '#264653',
-                    'light-blue': '#81B9D4',
-                    cream: '#F2F3F4',
+                // Kairouan Historical Color Palette - Inspired by the Great Mosque
+                kairouan: {
+                    gold: '#D4AF37',           // Golden accents from mosaics
+                    'deep-gold': '#B8941E',    // Darker gold for depth
+                    brass: '#B87333',          // Brass details
+                    terracotta: '#C27145',     // Traditional terracotta
+                    limestone: '#F5F1E8',      // Limestone walls
+                    'warm-cream': '#FBF8F1',   // Warm cream
+                    burgundy: '#8B2635',       // Deep burgundy from carpets
+                    'olive-green': '#6B7C59',  // Olive tones
+                    'desert-sand': '#E8D5B7',  // Desert sand
+                    midnight: '#1A2332',       // Deep blue-black
                 },
                 brand: {
-                    DEFAULT: '#264653',    // Deep Blue
-                    light: '#F2F3F4',      // Soft Cream
-                    dark: '#264653',       // Deep Blue
+                    DEFAULT: '#1A2332',        // Midnight blue - elegant & modern
+                    light: '#F5F1E8',          // Limestone
+                    dark: '#0F1419',           // Deeper midnight
                 },
                 accent: {
-                    DEFAULT: '#E07A5F',    // Terracotta
-                    sand: '#F4A261',       // Warm Sand
-                    blue: '#3D5A80',       // Mediterranean Blue
+                    DEFAULT: '#D4AF37',        // Gold - main accent
+                    amber: '#E8B545',          // Brighter gold/amber
+                    copper: '#B87333',         // Copper/brass
+                    burgundy: '#8B2635',       // Burgundy accent
                 },
             },
             backgroundImage: {

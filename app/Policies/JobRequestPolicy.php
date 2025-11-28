@@ -24,7 +24,7 @@ class JobRequestPolicy
         if ($user->providerProfile) {
             $profile = $user->providerProfile;
             if ($request->offers()->where('provider_id', $profile->id)->exists()) return true;
-            if ($profile->status === 'approved' && $request->status === 'open' && $profile->city === $request->city) return true;
+            if ($profile->status === 'approved' && $request->status === 'open') return true;
         }
         return false;
     }

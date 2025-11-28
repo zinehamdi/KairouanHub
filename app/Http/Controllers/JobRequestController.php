@@ -20,6 +20,25 @@ class JobRequestController extends Controller
         $this->middleware(['auth','verified']);
     }
 
+    public function index()
+    {
+        // Provider-facing: browse all open requests
+        $query = JobRequest::with(['category', 'service'])
+            ->where('status', 'open')
+            ->latest();
+
+        // If user is a provider, optionally filter by their city
+        if (Auth::user()->providerProfile) {
+            $city = request('city') ?: Auth::user()->providerProfile->city;
+            if ($city) {
+                $query->where('city', $city);
+            }
+        }
+
+        $requests = $query->paginate(12);
+        return view('requests.index', compact('requests'));
+    }
+
     public function create()
     {
         $this->authorize('create', JobRequest::class);
@@ -48,16 +67,19 @@ class JobRequestController extends Controller
             'status' => 'open'
         ]);
 
-        // Notify approved providers who offer the requested service in the same city
+        // Notify approved providers (send to their User accounts) who offer the requested service in the same city
         $providers = ProviderProfile::query()
+            ->with('user')
             ->where('status','approved')
             ->where('city', $job->city)
             ->when($job->service_id, function($q) use ($job) {
-                // Filter providers who offer this specific service
                 $q->whereHas('services', fn($sq) => $sq->where('service_id', $job->service_id));
             })
             ->get();
-        Notification::send($providers, new NewJobRequestNotification($job));
+        $users = $providers->pluck('user')->filter()->unique('id');
+        if ($users->isNotEmpty()) {
+            Notification::send($users, new NewJobRequestNotification($job));
+        }
 
         return redirect()->route('requests.show', $job->id)->with('success', __('messages.created'));
     }

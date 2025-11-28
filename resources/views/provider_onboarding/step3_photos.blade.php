@@ -93,7 +93,7 @@
                                 Upload up to <span class="text-2xl font-extrabold bg-gradient-to-r from-cyan-600 to-teal-700 bg-clip-text text-transparent">{{ $max }}</span> high-quality images 🖼️
                             </p>
                             <p class="mt-3 text-base font-medium text-gray-600">
-                                Supported formats: <span class="font-bold text-cyan-600">JPG</span>, <span class="font-bold text-teal-600">PNG</span>, <span class="font-bold text-green-600">WEBP</span> (Max 5MB each)
+                                All image formats supported • Auto-optimized to WebP • Max 10MB each
                             </p>
                         </div>
                     </div>
@@ -115,15 +115,25 @@
                             Back
                         </span>
                     </a>
-                    <button type="submit" class="group relative px-12 py-5 bg-gradient-to-r from-cyan-600 via-teal-600 to-green-600 text-white font-extrabold text-xl rounded-2xl shadow-2xl hover:shadow-cyan-500/50 hover:scale-110 transition-all duration-300 overflow-hidden">
-                        <span class="relative z-10 flex items-center">
-                            {{ __('onboarding.buttons.upload') }} & Complete 🎉
-                            <svg class="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
-                            </svg>
-                        </span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-green-600 to-cyan-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </button>
+                    <div class="flex gap-3">
+                        <a href="{{ route('provider.dashboard') }}" class="group px-8 py-4 bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 text-white font-bold text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                            <span class="flex items-center">
+                                Skip for Now
+                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                                </svg>
+                            </span>
+                        </a>
+                        <button type="submit" onclick="return validatePhotos()" class="group relative px-12 py-5 bg-gradient-to-r from-cyan-600 via-teal-600 to-green-600 text-white font-extrabold text-xl rounded-2xl shadow-2xl hover:shadow-cyan-500/50 hover:scale-110 transition-all duration-300 overflow-hidden">
+                            <span class="relative z-10 flex items-center">
+                                {{ __('onboarding.buttons.upload') }} & Complete 🎉
+                                <svg class="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-green-600 to-cyan-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -195,6 +205,17 @@ function updateFileList(input) {
     } else {
         fileList.classList.add('hidden');
     }
+}
+
+function validatePhotos() {
+    const fileInput = document.getElementById('photos');
+    if (!fileInput.files || fileInput.files.length === 0) {
+        if (confirm('⚠️ No photos selected!\n\nYou haven\'t selected any photos to upload. Click "OK" to continue without photos, or "Cancel" to select photos first.')) {
+            return true;
+        }
+        return false;
+    }
+    return true;
 }
 </script>
 @endsection

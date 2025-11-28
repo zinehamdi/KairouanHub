@@ -346,6 +346,73 @@ class ComprehensiveCategorySeeder extends Seeder
 				'description' => 'Pet grooming, veterinary services, pet sitting',
 				'icon' => '🐾'
 			],
+
+			// 12. Food & Beverage Services - خدمات الطعام والمشروبات
+			[
+				'name' => 'Restaurant & Cafe Services',
+				'name_ar' => 'مطاعم ومقاهي',
+				'slug' => 'restaurant-cafe',
+				'description' => 'Restaurants, cafes, coffee shops',
+				'icon' => '☕'
+			],
+			[
+				'name' => 'Fast Food Services',
+				'name_ar' => 'مطاعم الوجبات السريعة',
+				'slug' => 'fast-food',
+				'description' => 'Fast food restaurants, takeaway, delivery',
+				'icon' => '🍔'
+			],
+			[
+				'name' => 'Juice & Smoothie Bars',
+				'name_ar' => 'محلات العصائر والمشروبات',
+				'slug' => 'juice-bars',
+				'description' => 'Fresh juice, smoothies, healthy drinks',
+				'icon' => '🥤'
+			],
+			[
+				'name' => 'Bakery & Pastry',
+				'name_ar' => 'مخابز وحلويات',
+				'slug' => 'bakery',
+				'description' => 'Bakeries, pastries, desserts',
+				'icon' => '🥐'
+			],
+
+			// 13. Agriculture & Farming - الزراعة والمنتجات الزراعية
+			[
+				'name' => 'Agricultural Products',
+				'name_ar' => 'المنتجات الزراعية',
+				'slug' => 'agriculture-products',
+				'description' => 'Fresh produce, organic farming, farm products',
+				'icon' => '🌾'
+			],
+			[
+				'name' => 'Livestock & Poultry',
+				'name_ar' => 'الثروة الحيوانية والدواجن',
+				'slug' => 'livestock',
+				'description' => 'Livestock farming, poultry, dairy products',
+				'icon' => '🐄'
+			],
+			[
+				'name' => 'Olive Oil & Products',
+				'name_ar' => 'زيت الزيتون ومشتقاته',
+				'slug' => 'olive-products',
+				'description' => 'Olive oil, olive products, traditional pressing',
+				'icon' => '🫒'
+			],
+			[
+				'name' => 'Honey & Bee Products',
+				'name_ar' => 'العسل ومنتجات النحل',
+				'slug' => 'honey-products',
+				'description' => 'Natural honey, bee products, beekeeping',
+				'icon' => '🍯'
+			],
+			[
+				'name' => 'Traditional Food Products',
+				'name_ar' => 'المنتجات الغذائية التقليدية',
+				'slug' => 'traditional-food',
+				'description' => 'Traditional foods, local specialties, artisanal products',
+				'icon' => '🥘'
+			],
 		];
 
 		foreach ($categories as $categoryData) {

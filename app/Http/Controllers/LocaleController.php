@@ -23,4 +23,10 @@ class LocaleController extends Controller
         // Redirect back
         return redirect()->back();
     }
+
+    public function switchFromRequest(Request $request)
+    {
+        $locale = $request->input('locale');
+        return $this->switch($locale);
+    }
 }

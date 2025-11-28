@@ -17,7 +17,7 @@ class ProviderProfile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id','category_id','display_name','bio','city','cities_json','skills_json','photos_json','badge_level','status','avg_rating','completed_jobs','social_json','website'
+        'user_id','category_id','display_name','avatar','bio','city','cities_json','skills_json','photos_json','badge_level','status','avg_rating','completed_jobs','social_json','website'
     ];
 
     protected $casts = [
@@ -84,6 +84,14 @@ class ProviderProfile extends Model
         return $this->belongsToMany(Service::class, 'provider_services', 'provider_id', 'service_id')
             ->withPivot(['price_min','price_max'])
             ->withTimestamps();
+    }
+
+    public function getAvatarUrlAttribute(): string
+    {
+        if ($this->avatar) {
+            return asset('storage/'.$this->avatar);
+        }
+        return asset('images/default-avatar.png');
     }
 
     /** Offers submitted by provider */

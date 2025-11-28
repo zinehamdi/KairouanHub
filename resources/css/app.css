@@ -85,13 +85,13 @@
         box-shadow: 0 8px 24px rgba(38, 70, 83, 0.12);
     }
 
-    /* Mediterranean Buttons */
+    /* Mediterranean Buttons - Updated to match navbar */
     .btn-terracotta {
         @apply px-6 py-3 rounded-xl font-semibold;
         @apply text-white shadow-md;
         @apply transition-all duration-300;
         @apply hover:shadow-lg hover:scale-[1.02];
-        background: linear-gradient(135deg, var(--color-terracotta) 0%, var(--color-warm-sand) 100%);
+        background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);
     }
 
     .btn-mediterranean {
@@ -99,20 +99,20 @@
         @apply text-white shadow-md;
         @apply transition-all duration-300;
         @apply hover:shadow-lg hover:scale-[1.02];
-        background: linear-gradient(135deg, var(--color-mediterranean-blue) 0%, var(--color-deep-blue) 100%);
+        background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);
     }
 
     .btn-outline-mediterranean {
         @apply px-6 py-3 rounded-xl font-semibold;
         @apply border-2 bg-transparent;
         @apply transition-all duration-300;
-        border-color: var(--color-mediterranean-blue);
-        color: var(--color-mediterranean-blue);
+        border-color: #E07A5F;
+        color: #E07A5F;
     }
 
     .btn-outline-mediterranean:hover {
-        background: var(--color-mediterranean-blue);
-        @apply text-white;
+        background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);
+        @apply text-white border-transparent;
     }
 
     /* Input Fields */

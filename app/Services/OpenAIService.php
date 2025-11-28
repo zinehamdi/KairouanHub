@@ -12,11 +12,9 @@ class OpenAIService
 	{
 		$apiKey = config('services.openai.api_key');
 
-		if (!$apiKey) {
-			throw new \Exception('OpenAI API key not configured');
+		if ($apiKey) {
+			$this->client = OpenAI::client($apiKey);
 		}
-
-		$this->client = OpenAI::client($apiKey);
 	}
 
 	/**

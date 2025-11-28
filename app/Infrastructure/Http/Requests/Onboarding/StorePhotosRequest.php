@@ -12,8 +12,8 @@ class StorePhotosRequest extends FormRequest
     {
         $max = config('appsettings.providers.max_gallery', 6);
         return [
-            'photos' => ['required','array','min:1','max:'.$max],
-            'photos.*' => ['file','mimes:jpeg,png,webp','max:2048'],
+            'photos' => ['nullable','array','max:'.$max],
+            'photos.*' => ['file','image','max:10240'],
         ];
     }
 }

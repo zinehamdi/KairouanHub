@@ -12,12 +12,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController as PublicServiceController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
+use App\Http\Controllers\Admin\ProviderController as AdminProviderController;
 use Spatie\Permission\Middleware\RoleMiddleware;
-
+use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\ChatbotController;
 
 
 // Locale switching
-Route::get('/locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index']);
+
+Route::get('lang/{locale}', [App\Http\Controllers\LocaleController::class, 'switch'])->name('lang.switch');
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -35,17 +39,27 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/provider/setup/services', [ProviderOnboardingController::class, 'storeServices'])->name('provider.services.store');
     Route::get('/provider/setup/photos', [ProviderOnboardingController::class, 'photos'])->name('provider.photos');
     Route::post('/provider/setup/photos', [ProviderOnboardingController::class, 'storePhotos'])->name('provider.photos.store');
-    Route::get('/provider/dashboard', [ProviderOnboardingController::class, 'dashboard'])->name('provider.dashboard');
+    Route::get('/provider/dashboard', function () {
+        return redirect()->route('dashboard');
+    })->name('provider.dashboard');
+    Route::post('/provider/avatar', [ProviderOnboardingController::class, 'updateAvatar'])->name('provider.avatar.update');
 });
 // Health check
 Route::get('/healthz', [HomeController::class, 'healthz']);
 
 // Language switcher
-Route::post('/lang/switch', [LanguageController::class, 'switch'])->name('lang.switch');
+Route::post('/lang/switch', [LocaleController::class, 'switchFromRequest'])->name('lang.switch.post');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    $profile = null;
+    if (auth()->check()) {
+        $profile = \App\Models\ProviderProfile::where('user_id', auth()->id())->with('services')->first();
+        if ($profile) {
+            $profile = $profile->fresh(['services']); // Reload from database
+        }
+    }
+    return view('dashboard', compact('profile'));
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware(['auth', 'throttle:20,1'])->group(function () {
@@ -60,6 +74,7 @@ require __DIR__ . '/auth.php';
 // Job Requests & Offers (authenticated only)
 Route::middleware(['auth'])->group(function () {
     // Job Requests
+    Route::get('/requests', [JobRequestController::class, 'index'])->name('requests.index');
     Route::get('/requests/create', [JobRequestController::class, 'create'])->name('requests.create');
     Route::post('/requests', [JobRequestController::class, 'store'])->name('requests.store');
     Route::get('/requests/mine', [JobRequestController::class, 'myRequests'])->name('requests.mine');
@@ -79,5 +94,14 @@ Route::prefix('admin')
         Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
         Route::resource('categories', AdminCategoryController::class);
         Route::resource('services', AdminServiceController::class);
+        Route::resource('providers', AdminProviderController::class);
+        Route::post('providers/{provider}/approve', [AdminProviderController::class, 'approve'])->name('providers.approve');
+        Route::post('providers/{provider}/reject', [AdminProviderController::class, 'reject'])->name('providers.reject');
     });
+
+// Chatbot endpoints (session-scoped, rate limited)
+Route::middleware(['web', 'throttle:60,1'])->group(function () {
+    Route::get('/chatbot/history', [ChatbotController::class, 'history'])->name('chatbot.history');
+    Route::post('/chatbot/message', [ChatbotController::class, 'message'])->name('chatbot.message');
+});
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="min-h-screen bg-soft-cream py-12">
+    <div class="min-h-screen bg-kairouan-warm-cream py-12">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <x-flash />
 
@@ -10,10 +10,10 @@
                     <!-- Step 1 - Active -->
                     <div class="flex items-center">
                         <div
-                            class="flex items-center justify-center w-12 h-12 rounded-full bg-terracotta-gradient text-white font-bold text-lg shadow-soft">
+                            class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-accent-DEFAULT to-accent-amber text-white font-bold text-lg shadow-soft">
                             1
                         </div>
-                        <span class="ml-3 text-sm font-bold text-terracotta">Basic Info</span>
+                        <span class="ml-3 text-sm font-bold text-accent-DEFAULT">Basic Info</span>
                     </div>
                     <div class="flex-1 h-1 bg-gray-300 max-w-[100px] rounded-full"></div>
 
@@ -41,7 +41,7 @@
             <!-- Form Card -->
             <div class="card-mediterranean overflow-hidden">
                 <!-- Card Header -->
-                <div class="bg-terracotta-gradient px-8 py-10">
+                <div class="bg-gradient-to-r from-accent-DEFAULT to-accent-amber px-8 py-10">
                     <div class="flex items-center gap-4 mb-3">
                         <div class="w-14 h-14 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,8 +60,8 @@
 
                     <!-- Field of Work -->
                     <div>
-                        <label for="category_id" class="block text-sm font-bold text-deep-blue mb-2">
-                            Field of Work <span class="text-terracotta">*</span>
+                        <label for="category_id" class="block text-sm font-bold text-brand-dark mb-2">
+                            Field of Work <span class="text-accent-DEFAULT">*</span>
                         </label>
                         <select id="category_id" name="category_id" required class="input-mediterranean">
                             <option value="">-- Select your field of work --</option>
@@ -80,8 +80,8 @@
 
                     <!-- Display Name -->
                     <div>
-                        <label for="display_name" class="block text-sm font-bold text-deep-blue mb-2">
-                            {{ __('onboarding.fields.display_name') }} <span class="text-terracotta">*</span>
+                        <label for="display_name" class="block text-sm font-bold text-brand-dark mb-2">
+                            {{ __('onboarding.fields.display_name') }} <span class="text-accent-DEFAULT">*</span>
                         </label>
                         <input id="display_name" name="display_name" type="text" required class="input-mediterranean"
                             placeholder="Your business or professional name">
@@ -90,8 +90,8 @@
 
                     <!-- City -->
                     <div>
-                        <label for="city" class="block text-sm font-bold text-deep-blue mb-2">
-                            {{ __('onboarding.fields.city') }} <span class="text-terracotta">*</span>
+                        <label for="city" class="block text-sm font-bold text-brand-dark mb-2">
+                            {{ __('onboarding.fields.city') }} <span class="text-accent-DEFAULT">*</span>
                         </label>
                         <input id="city" name="city" type="text" required class="input-mediterranean"
                             placeholder="Kairouan">
@@ -100,7 +100,7 @@
 
                     <!-- Bio -->
                     <div>
-                        <label for="bio" class="block text-sm font-bold text-deep-blue mb-2">
+                        <label for="bio" class="block text-sm font-bold text-brand-dark mb-2">
                             {{ __('onboarding.fields.bio') }}
                         </label>
                         <textarea id="bio" name="bio" rows="4" class="input-mediterranean"
@@ -110,7 +110,7 @@
 
                     <!-- Website -->
                     <div>
-                        <label for="website" class="block text-sm font-bold text-deep-blue mb-2">
+                        <label for="website" class="block text-sm font-bold text-brand-dark mb-2">
                             {{ __('onboarding.fields.website') }}
                         </label>
                         <input id="website" name="website" type="url" class="input-mediterranean"
@@ -120,28 +120,28 @@
 
                     <!-- Skills -->
                     <div>
-                        <label for="skills" class="block text-sm font-bold text-deep-blue mb-2">
+                        <label for="skills" class="block text-sm font-bold text-brand-dark mb-2">
                             {{ __('onboarding.fields.skills') }}
                         </label>
-                        <input id="skills" name="skills" type="text" class="input-mediterranean"
+                        <input id="skills" type="text" class="input-mediterranean"
                             placeholder="e.g. plumbing, design, electrical">
                         <p class="mt-2 text-sm text-gray-600">Separate skills with commas</p>
                     </div>
 
                     <!-- Cities Served -->
                     <div>
-                        <label for="cities" class="block text-sm font-bold text-deep-blue mb-2">
+                        <label for="cities" class="block text-sm font-bold text-brand-dark mb-2">
                             {{ __('onboarding.fields.cities') }}
                         </label>
-                        <input id="cities" name="cities" type="text" class="input-mediterranean"
+                        <input id="cities" type="text" class="input-mediterranean"
                             placeholder="Kairouan, Tunis, Sousse">
                         <p class="mt-2 text-sm text-gray-600">Separate cities with commas</p>
                     </div>
 
                     <!-- Social Media Section -->
-                    <div class="bg-soft-cream rounded-xl p-6 border border-gray-200">
-                        <h3 class="text-lg font-bold text-deep-blue mb-4 flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="bg-kairouan-warm-cream rounded-xl p-6 border border-gray-200">
+                        <h3 class="text-lg font-bold text-brand-dark mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-accent-DEFAULT" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                             </svg>
@@ -199,7 +199,7 @@
             <div class="mt-6 text-center bg-white rounded-xl p-4 shadow-soft">
                 <p class="text-sm text-gray-600">
                     Need help? Contact us at <a href="mailto:support@kairouanhub.com"
-                        class="text-terracotta hover:text-mediterranean-blue underline">support@kairouanhub.com</a>
+                        class="text-accent-DEFAULT hover:text-mediterranean-blue underline">support@kairouanhub.com</a>
                 </p>
             </div>
         </div>

@@ -132,6 +132,44 @@ class ComprehensiveServiceSeeder extends Seeder
             ['category' => 'delivery', 'name' => 'Package Delivery', 'name_ar' => 'توصيل طرود', 'price' => 20],
             ['category' => 'delivery', 'name' => 'Express Delivery', 'name_ar' => 'توصيل سريع', 'price' => 30],
             ['category' => 'delivery', 'name' => 'Bulk Delivery', 'name_ar' => 'توصيل بالجملة', 'price' => 50],
+            
+            // Food & Beverage Services
+            ['category' => 'restaurant-cafe', 'name' => 'Dine-in Service', 'name_ar' => 'خدمة الطعام داخل المطعم', 'price' => 15],
+            ['category' => 'restaurant-cafe', 'name' => 'Coffee & Pastries', 'name_ar' => 'قهوة ومعجنات', 'price' => 10],
+            ['category' => 'restaurant-cafe', 'name' => 'Traditional Tunisian Cuisine', 'name_ar' => 'المطبخ التونسي التقليدي', 'price' => 20],
+            
+            ['category' => 'fast-food', 'name' => 'Sandwich & Wraps', 'name_ar' => 'ساندويتش ولفائف', 'price' => 8],
+            ['category' => 'fast-food', 'name' => 'Pizza & Burgers', 'name_ar' => 'بيتزا وبرغر', 'price' => 12],
+            ['category' => 'fast-food', 'name' => 'Quick Delivery', 'name_ar' => 'توصيل سريع', 'price' => 5],
+            
+            ['category' => 'juice-bars', 'name' => 'Fresh Fruit Juice', 'name_ar' => 'عصير فواكه طازج', 'price' => 5],
+            ['category' => 'juice-bars', 'name' => 'Smoothies & Shakes', 'name_ar' => 'سموثي ومخفوق', 'price' => 7],
+            ['category' => 'juice-bars', 'name' => 'Detox Juice', 'name_ar' => 'عصير ديتوكس', 'price' => 8],
+            
+            ['category' => 'bakery', 'name' => 'Fresh Bread', 'name_ar' => 'خبز طازج', 'price' => 3],
+            ['category' => 'bakery', 'name' => 'Traditional Pastries', 'name_ar' => 'معجنات تقليدية', 'price' => 5],
+            ['category' => 'bakery', 'name' => 'Custom Cakes', 'name_ar' => 'كعك مخصص', 'price' => 50],
+            
+            // Agriculture & Farming
+            ['category' => 'agriculture-products', 'name' => 'Fresh Vegetables', 'name_ar' => 'خضروات طازجة', 'price' => 10],
+            ['category' => 'agriculture-products', 'name' => 'Organic Fruits', 'name_ar' => 'فواكه عضوية', 'price' => 15],
+            ['category' => 'agriculture-products', 'name' => 'Herbs & Spices', 'name_ar' => 'أعشاب وتوابل', 'price' => 8],
+            
+            ['category' => 'livestock', 'name' => 'Fresh Lamb', 'name_ar' => 'لحم غنم طازج', 'price' => 40],
+            ['category' => 'livestock', 'name' => 'Free-Range Chicken', 'name_ar' => 'دجاج بلدي', 'price' => 25],
+            ['category' => 'livestock', 'name' => 'Fresh Dairy Products', 'name_ar' => 'منتجات ألبان طازجة', 'price' => 12],
+            
+            ['category' => 'olive-products', 'name' => 'Extra Virgin Olive Oil', 'name_ar' => 'زيت زيتون بكر ممتاز', 'price' => 30],
+            ['category' => 'olive-products', 'name' => 'Olive Paste', 'name_ar' => 'معجون زيتون', 'price' => 15],
+            ['category' => 'olive-products', 'name' => 'Pickled Olives', 'name_ar' => 'زيتون مخلل', 'price' => 10],
+            
+            ['category' => 'honey-products', 'name' => 'Natural Honey', 'name_ar' => 'عسل طبيعي', 'price' => 25],
+            ['category' => 'honey-products', 'name' => 'Royal Jelly', 'name_ar' => 'غذاء ملكات النحل', 'price' => 50],
+            ['category' => 'honey-products', 'name' => 'Beeswax Products', 'name_ar' => 'منتجات شمع العسل', 'price' => 20],
+            
+            ['category' => 'traditional-food', 'name' => 'Harissa', 'name_ar' => 'هريسة', 'price' => 8],
+            ['category' => 'traditional-food', 'name' => 'Couscous', 'name_ar' => 'كسكسي', 'price' => 12],
+            ['category' => 'traditional-food', 'name' => 'Traditional Sweets', 'name_ar' => 'حلويات تقليدية', 'price' => 15],
         ];
         
         foreach ($services as $serviceData) {
