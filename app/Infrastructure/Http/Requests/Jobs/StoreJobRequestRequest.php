@@ -14,6 +14,7 @@ class StoreJobRequestRequest extends FormRequest
         return [
             'category_id' => ['required','exists:categories,id'],
             'service_id' => ['nullable','exists:services,id'],
+            'provider_id' => ['nullable','exists:provider_profiles,id'],
             'details' => ['required','string','max:2000'],
             'city' => ['required','string','max:120'],
             'photos' => ['nullable','array','max:4'],

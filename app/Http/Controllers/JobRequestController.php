@@ -39,11 +39,17 @@ class JobRequestController extends Controller
         return view('requests.index', compact('requests'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $this->authorize('create', JobRequest::class);
         $categories = Category::query()->orderBy('name')->get(['id','name']);
-        return view('requests.create', compact('categories'));
+        
+        $targetProvider = null;
+        if ($request->has('provider_id')) {
+            $targetProvider = ProviderProfile::with('user')->find($request->provider_id);
+        }
+        
+        return view('requests.create', compact('categories', 'targetProvider'));
     }
 
     public function store(StoreJobRequestRequest $request)
@@ -61,6 +67,7 @@ class JobRequestController extends Controller
             'client_id' => Auth::id(),
             'category_id' => $data['category_id'],
             'service_id' => $data['service_id'] ?? null,
+            'provider_id' => $data['provider_id'] ?? null,
             'details' => $data['details'],
             'photos_json' => $photos,
             'city' => $data['city'],

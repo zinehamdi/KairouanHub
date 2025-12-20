@@ -24,22 +24,19 @@ class ProviderController extends Controller
         return view('providers.index', compact('providers','filters'));
     }
 
-    /** Show by username or id fallback */
-    public function show(Request $request, string $username)
+    /** Show provider public profile */
+    public function show(ProviderProfile $provider)
     {
-        $user = $request->user();
-        $profile = $this->repo->findByUsernameOrId($username);
-        if(!$profile) {
-            // try public approved only
-            $profile = $this->repo->findPublicByUsernameOrId($username);
-        }
-        if(!$profile) abort(404);
-
-        $isOwnerOrAdmin = $user && ($user->id === $profile->user_id || $user->hasRole('admin'));
-        if($profile->status !== 'approved' && !$isOwnerOrAdmin) {
+        // Ensure provider is approved or viewer is admin/owner
+        $user = auth()->user();
+        $isOwnerOrAdmin = $user && ($user->id === $provider->user_id || $user->hasRole('admin'));
+        
+        if ($provider->status !== 'approved' && !$isOwnerOrAdmin) {
             abort(404);
         }
-        $profile->load(['user','services']);
-        return view('providers.show', compact('profile'));
+
+        $provider->load(['user', 'services.category', 'category']);
+        
+        return view('providers.show', compact('provider'));
     }
 }

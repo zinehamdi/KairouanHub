@@ -17,7 +17,7 @@ class ProviderProfile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id','category_id','display_name','avatar','bio','city','cities_json','skills_json','photos_json','badge_level','status','avg_rating','completed_jobs','social_json','website'
+        'user_id','phone','category_id','display_name','avatar','bio','city','cities_json','skills_json','photos_json','badge_level','status','avg_rating','completed_jobs','social_json','website'
     ];
 
     protected $casts = [

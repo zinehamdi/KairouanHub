@@ -17,7 +17,7 @@ class Service extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_id', 'name', 'slug', 'summary', 'is_active',
+        'category_id', 'name', 'name_ar', 'slug', 'summary', 'is_active',
     ];
 
     protected $casts = [

@@ -17,6 +17,7 @@ use Spatie\Permission\Middleware\RoleMiddleware;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\ChatbotController;
 
+use Illuminate\Support\Facades\Auth;
 
 // Locale switching
 Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index']);
@@ -29,7 +30,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/services', [PublicServiceController::class, 'index'])->name('services.index');
 Route::get('/services/{slug}', [PublicServiceController::class, 'show'])->name('services.show');
 Route::get('/providers', [ProviderController::class, 'index'])->name('providers.index');
-Route::get('/providers/{username}', [ProviderController::class, 'show'])->name('providers.show');
+Route::get('/providers/{provider}', [ProviderController::class, 'show'])->name('providers.show');
 
 // Provider onboarding (auth only, no verification required)
 Route::middleware(['auth'])->group(function () {
@@ -43,6 +44,15 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->route('dashboard');
     })->name('provider.dashboard');
     Route::post('/provider/avatar', [ProviderOnboardingController::class, 'updateAvatar'])->name('provider.avatar.update');
+    
+    // Provider Service Management
+    Route::post('/provider/services/add', [ProviderOnboardingController::class, 'addService'])->name('provider.services.add');
+    Route::put('/provider/services/{service}', [ProviderOnboardingController::class, 'updateService'])->name('provider.services.update');
+    Route::delete('/provider/services/{service}', [ProviderOnboardingController::class, 'deleteService'])->name('provider.services.delete');
+    
+    // Provider Gallery Management
+    Route::post('/provider/gallery/upload', [ProviderOnboardingController::class, 'uploadGalleryPhotos'])->name('provider.gallery.upload');
+    Route::delete('/provider/gallery/{index}', [ProviderOnboardingController::class, 'deleteGalleryPhoto'])->name('provider.gallery.delete');
 });
 // Health check
 Route::get('/healthz', [HomeController::class, 'healthz']);
@@ -52,8 +62,8 @@ Route::post('/lang/switch', [LocaleController::class, 'switchFromRequest'])->nam
 
 Route::get('/dashboard', function () {
     $profile = null;
-    if (auth()->check()) {
-        $profile = \App\Models\ProviderProfile::where('user_id', auth()->id())->with('services')->first();
+    if (Auth::check()) {
+        $profile = \App\Models\ProviderProfile::where('user_id', Auth::id())->with('services')->first();
         if ($profile) {
             $profile = $profile->fresh(['services']); // Reload from database
         }

@@ -14,34 +14,48 @@ class ServicesSeeder extends Seeder
     {
         $map = [
             'plumbing' => [
-                'Leak Fix', 'Pipe Installation', 'Bathroom Renovation',
+                ['en' => 'Leak Fix', 'ar' => 'إصلاح التسربات'],
+                ['en' => 'Pipe Installation', 'ar' => 'تركيب الأنابيب'],
+                ['en' => 'Bathroom Renovation', 'ar' => 'تجديد الحمام'],
             ],
             'electricity' => [
-                'Socket Repair', 'Lighting Installation', 'Fuse Box Upgrade',
+                ['en' => 'Socket Repair', 'ar' => 'إصلاح المقابس'],
+                ['en' => 'Lighting Installation', 'ar' => 'تركيب الإضاءة'],
+                ['en' => 'Fuse Box Upgrade', 'ar' => 'تحديث صندوق الكهرباء'],
             ],
             'air-conditioning' => [
-                'AC Installation', 'AC Gas Refill', 'AC Maintenance',
+                ['en' => 'AC Installation', 'ar' => 'تركيب مكيفات'],
+                ['en' => 'AC Gas Refill', 'ar' => 'تعبئة غاز المكيف'],
+                ['en' => 'AC Maintenance', 'ar' => 'صيانة مكيفات'],
             ],
             'moving' => [
-                'Local Moving', 'Packing Service', 'Furniture Assembly',
+                ['en' => 'Local Moving', 'ar' => 'نقل محلي'],
+                ['en' => 'Packing Service', 'ar' => 'خدمة التغليف'],
+                ['en' => 'Furniture Assembly', 'ar' => 'تركيب الأثاث'],
             ],
             'carpentry' => [
-                'Custom Shelves', 'Door Repair',
+                ['en' => 'Custom Shelves', 'ar' => 'رفوف مخصصة'],
+                ['en' => 'Door Repair', 'ar' => 'إصلاح الأبواب'],
             ],
             'painter' => [
-                'Interior Painting', 'Exterior Painting',
+                ['en' => 'Interior Painting', 'ar' => 'دهان داخلي'],
+                ['en' => 'Exterior Painting', 'ar' => 'دهان خارجي'],
             ],
             'car-wash-mobile' => [
-                'Exterior Wash', 'Full Detailing',
+                ['en' => 'Exterior Wash', 'ar' => 'غسيل خارجي'],
+                ['en' => 'Full Detailing', 'ar' => 'تنظيف شامل'],
             ],
             'photographer' => [
-                'Event Photography', 'Portrait Session',
+                ['en' => 'Event Photography', 'ar' => 'تصوير مناسبات'],
+                ['en' => 'Portrait Session', 'ar' => 'جلسة تصوير شخصية'],
             ],
             'wedding-services' => [
-                'Wedding Planning', 'Decoration Setup',
+                ['en' => 'Wedding Planning', 'ar' => 'تخطيط حفلات الزفاف'],
+                ['en' => 'Decoration Setup', 'ar' => 'تجهيز الديكور'],
             ],
             'olive-harvest' => [
-                'Seasonal Picking Team', 'Olive Transport',
+                ['en' => 'Seasonal Picking Team', 'ar' => 'فريق جني الزيتون'],
+                ['en' => 'Olive Transport', 'ar' => 'نقل الزيتون'],
             ],
         ];
 
@@ -49,13 +63,14 @@ class ServicesSeeder extends Seeder
             $category = Category::where('slug', $slug)->first();
             if (!$category) continue;
 
-            foreach ($services as $name) {
+            foreach ($services as $serviceData) {
                 Service::firstOrCreate(
-                    ['slug' => Str::slug($name)],
+                    ['slug' => Str::slug($serviceData['en'])],
                     [
                         'category_id' => $category->id,
-                        'name' => $name,
-                        'summary' => $name.' service',
+                        'name' => $serviceData['en'],
+                        'name_ar' => $serviceData['ar'],
+                        'summary' => $serviceData['en'].' service',
                         'is_active' => true,
                     ]
                 );

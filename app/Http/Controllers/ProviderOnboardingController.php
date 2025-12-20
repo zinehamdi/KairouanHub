@@ -248,6 +248,134 @@ class ProviderOnboardingController extends Controller
         return view('provider_onboarding.dashboard', compact('profile'));
     }
 
+    /**
+     * Add a new service to provider's service list
+     */
+    public function addService(Request $request): RedirectResponse
+    {
+        $profile = $this->myProfileOrFail();
+        $this->authorize('update', $profile);
+
+        $request->validate([
+            'service_id' => ['required', 'exists:services,id'],
+            'price_min' => ['nullable', 'numeric', 'min:0'],
+            'price_max' => ['nullable', 'numeric', 'min:0', 'gte:price_min'],
+        ]);
+
+        // Check if service already exists for this provider
+        if ($profile->services()->where('service_id', $request->service_id)->exists()) {
+            return redirect()->route('dashboard')->withErrors(['service_id' => 'You already offer this service.']);
+        }
+
+        $profile->services()->attach($request->service_id, [
+            'price_min' => $request->price_min,
+            'price_max' => $request->price_max,
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Service added successfully!');
+    }
+
+    /**
+     * Update an existing service
+     */
+    public function updateService(Request $request, Service $service): RedirectResponse
+    {
+        $profile = $this->myProfileOrFail();
+        $this->authorize('update', $profile);
+
+        // Verify this service belongs to the provider
+        if (!$profile->services()->where('service_id', $service->id)->exists()) {
+            abort(403, 'Unauthorized');
+        }
+
+        $request->validate([
+            'price_min' => ['nullable', 'numeric', 'min:0'],
+            'price_max' => ['nullable', 'numeric', 'min:0', 'gte:price_min'],
+        ]);
+
+        $profile->services()->updateExistingPivot($service->id, [
+            'price_min' => $request->price_min,
+            'price_max' => $request->price_max,
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Service updated successfully!');
+    }
+
+    /**
+     * Remove a service from provider's service list
+     */
+    public function deleteService(Service $service): RedirectResponse
+    {
+        $profile = $this->myProfileOrFail();
+        $this->authorize('update', $profile);
+
+        // Verify this service belongs to the provider
+        if (!$profile->services()->where('service_id', $service->id)->exists()) {
+            abort(403, 'Unauthorized');
+        }
+
+        $profile->services()->detach($service->id);
+
+        return redirect()->route('dashboard')->with('success', 'Service removed successfully!');
+    }
+
+    /**
+     * Upload new photos to gallery
+     */
+    public function uploadGalleryPhotos(Request $request): RedirectResponse
+    {
+        $profile = $this->myProfileOrFail();
+        $this->authorize('update', $profile);
+
+        $request->validate([
+            'photos' => ['required', 'array', 'max:6'],
+            'photos.*' => ['required', 'file', 'image', 'max:10240'],
+        ]);
+
+        $paths = [];
+        
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $file) {
+                $filename = Str::uuid() . '.webp';
+                $path = 'providers/' . Auth::id() . '/gallery/' . $filename;
+                
+                $this->resizeAndSaveImage($file, $path);
+                
+                $paths[] = $path;
+            }
+        }
+        
+        $this->repo->appendPhotos($profile, $paths, config('appsettings.providers.max_gallery', 6));
+        
+        return redirect()->route('dashboard')->with('success', 'Photos uploaded successfully!');
+    }
+
+    /**
+     * Delete a photo from gallery by index
+     */
+    public function deleteGalleryPhoto(int $index): RedirectResponse
+    {
+        $profile = $this->myProfileOrFail();
+        $this->authorize('update', $profile);
+
+        $photos = $profile->photos_json ?? [];
+        
+        if (!isset($photos[$index])) {
+            abort(404, 'Photo not found');
+        }
+
+        // Delete file from storage
+        Storage::disk('public')->delete($photos[$index]);
+
+        // Remove from array
+        array_splice($photos, $index, 1);
+
+        // Update profile
+        $profile->update(['photos_json' => $photos]);
+
+        return redirect()->route('dashboard')->with('success', 'Photo deleted successfully!');
+    }
+
     private function myProfileOrFail(): ProviderProfile
     {
         $profile = $this->repo->findByUserId(Auth::id());
