@@ -6,6 +6,7 @@ use App\Models\ChatMessage;
 use OpenAI; // from openai-php/client
 use Illuminate\Support\Str;
 use Throwable;
+use Illuminate\Support\Facades\Log;
 
 class ChatbotService
 {
@@ -70,7 +71,7 @@ class ChatbotService
             }
             return $reply;
         } catch (Throwable $e) {
-            \Log::error('ChatGPT API Error: ' . $e->getMessage());
+            Log::error('ChatGPT API Error: ' . $e->getMessage());
             
             // Check for specific error types
             if (str_contains($e->getMessage(), 'rate limit')) {
@@ -135,10 +136,25 @@ class ChatbotService
         }
         
         // Greeting
-        if (str_contains($trimmed, 'السلام') || str_contains($trimmed, 'مرحبا') || str_contains($trimmed, 'أهلا') || str_contains($trimmed, 'hello') || str_contains($trimmed, 'hi')) {
-            return "وعليكم السلام! 😊\n\nأهلا بيك في KairouanHub!\n\nشنوة تحب تسأل؟ نقدر نعاونك تلقى:\n- حرفيين\n- أطباء\n- أساتذة\n- محامين\n- سواقين\n- مطاعم\n\nوبرشة خدمات أخرى!";
+        if (Str::contains($trimmed, ['السلام', 'مرحبا', 'أهلا', 'hello', 'hi', 'صباح', 'مساء', 'عصبة'])) {
+            return "وعليكم السلام! 😊 أهلا بيك في KairouanHub!\n\nأنا المساعد الذكي الخاص بالمنصة. نقدر نعاونك تلقى:\n🔧 حرفيين (سباكة، كهرباء...)\n👨‍⚕️ أطباء ومختصين\n📚 أساتذة ودروس\n🚗 سواقين وتوصيل\n🍽️ مطاعم وقهاوي\n\nشنوة يهمك اليوم؟";
         }
-        
-        return "مرحبا! 😊\n\nنقدر نعاونك تلقى خدمات في القيروان:\n\n🔧 حرفيين\n👨‍⚕️ أطباء\n📚 أساتذة\n⚖️ محامين\n🚗 سواقين\n🍽️ مطاعم\n\nاسأل على أي فئة تحبها!";
+
+        // Specific Professions
+        if (Str::contains($trimmed, ['دهان', 'plombier', 'سباك', 'كهربائي', 'electricien', 'نجار', 'carpenter'])) {
+            return "عندنا حرفيين ممتازين في القيروان! 🛠️\n\nتنجم تشوف قسم 'الحرفيين' في المنصة وتلقى أرقامهم وتقييمات الناس ليهم.\n\nتحب نعطيك رابط القسم؟";
+        }
+
+        // Contact / Support
+        if (Str::contains($trimmed, ['تواصل', 'مشكل', 'admin', 'contact', 'support', 'كلمني'])) {
+            return "إذا عندك أي استفسار أو مشكل تقني، تنجم تتواصل مع فريق الدعم متاعنا عن طريق صفحة 'اتصل بنا' أو تبعث رسالة على صفحتنا في الفيسبوك. 😊";
+        }
+
+        // Prices
+        if (Str::contains($trimmed, ['أسعار', 'سوم', 'قداش', 'price', 'cost'])) {
+            return "الأسعار تختلف حسب نوع الخدمة والمزود. 💰\n\nأحسن طريقة هي أنك تدخل لبروفيل المزود، توة تلقى الأسعار التقديرية (Price Range) مكتوبة.\n\nتحب تشوف قائمة الخدمات؟";
+        }
+
+        return "مرحبا بيك! 😊 أنا هنا باش نسهلك العثور على أفضل الخدمات في القيروان.\n\nتقدر تسألني على:\n- أنواع الخدمات المتوفرة\n- كيفاش تطلب خدمة\n- وين موجودين\n- أسعار الخدمات بالتقريب\n\nشنوة تحب تعرف؟";
     }
 }
