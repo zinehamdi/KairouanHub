@@ -73,15 +73,7 @@ class ChatbotService
         } catch (Throwable $e) {
             Log::error('ChatGPT API Error: ' . $e->getMessage());
             
-            // Check for specific error types
-            if (str_contains($e->getMessage(), 'rate limit')) {
-                return "سامحني، وصلت للحد الأقصى. جرب مرة أخرى بعد شوية. 😊\n\nفي الانتظار، تنجم تتصفح الخدمات والمزودين!";
-            }
-            
-            if (str_contains($e->getMessage(), 'authentication') || str_contains($e->getMessage(), 'API key')) {
-                return "عندي مشكل تقني. تواصل مع الإدارة. في الوقت هذا، تنجم تشوف الخدمات المتوفرة!";
-            }
-            
+            // If it's an API error, we still want to help the user with local logic
             return $this->localFallback($userContent);
         }
     }

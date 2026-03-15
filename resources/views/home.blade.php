@@ -169,7 +169,7 @@
 
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 <a href="{{ route('requests.create') }}"
-                    class="group relative bg-gradient-to-br from-white/15 to-white/10 backdrop-blur-md rounded-2xl p-6 border-2 border-white/20 hover:border-accent-DEFAULT/50 hover:bg-white/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-lg">
+                    class="group relative bg-gradient-to-br from-white/25 to-white/15 backdrop-blur-md rounded-2xl p-6 border-2 border-white/40 hover:border-accent-DEFAULT/60 hover:bg-white/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-lg">
                     <div
                         class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-DEFAULT to-accent-amber flex items-center justify-center mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -190,7 +190,7 @@
 
                 {{-- Explore Services --}}
                 <a href="{{ route('services.index') }}"
-                    class="group relative bg-gradient-to-br from-white/15 to-white/10 backdrop-blur-md rounded-2xl p-6 border-2 border-white/20 hover:border-emerald-400/50 hover:bg-white/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-lg">
+                    class="group relative bg-gradient-to-br from-white/25 to-white/15 backdrop-blur-md rounded-2xl p-6 border-2 border-white/40 hover:border-emerald-400/60 hover:bg-white/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-lg">
                     <div
                         class="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -212,7 +212,7 @@
                 {{-- Suggest Provider --}}
                 @auth
                     <a href="{{ route('providers.suggest') }}"
-                        class="group relative bg-gradient-to-br from-white/15 to-white/10 backdrop-blur-md rounded-2xl p-6 border-2 border-white/20 hover:border-violet-400/50 hover:bg-white/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-lg">
+                        class="group relative bg-gradient-to-br from-white/25 to-white/15 backdrop-blur-md rounded-2xl p-6 border-2 border-white/40 hover:border-violet-400/60 hover:bg-white/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-lg">
                         <div
                             class="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -232,7 +232,7 @@
                     </a>
                 @else
                     <a href="{{ route('register') }}"
-                        class="group relative bg-gradient-to-br from-white/15 to-white/10 backdrop-blur-md rounded-2xl p-6 border-2 border-white/20 hover:border-violet-400/50 hover:bg-white/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-lg">
+                        class="group relative bg-gradient-to-br from-white/25 to-white/15 backdrop-blur-md rounded-2xl p-6 border-2 border-white/40 hover:border-violet-400/60 hover:bg-white/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-lg">
                         <div
                             class="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -254,7 +254,7 @@
 
                 {{-- Browse All --}}
                 <a href="{{ route('services.index') }}"
-                    class="group relative bg-gradient-to-br from-white/15 to-white/10 backdrop-blur-md rounded-2xl p-6 border-2 border-white/20 hover:border-blue-400/50 hover:bg-white/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-lg">
+                    class="group relative bg-gradient-to-br from-white/25 to-white/15 backdrop-blur-md rounded-2xl p-6 border-2 border-white/40 hover:border-blue-400/60 hover:bg-white/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-lg">
                     <div
                         class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center mb-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -550,7 +550,7 @@
                         <a href="{{ route('providers.suggest') }}" class="px-8 py-4 bg-accent-amber hover:bg-white hover:text-brand-dark text-brand-dark font-black rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-orange-500/20">
                             {{ __('home.suggest_now_earn') ?? 'أوصي الآن واربح' }}
                         </a>
-                        <a href="{{ route('dashboard') }}" class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold rounded-2xl hover:bg-white/20 transition-all">
+                        <a href="{{ route('dashboard') }}" class="px-8 py-4 bg-white/20 backdrop-blur-md border-2 border-white/40 text-white font-bold rounded-2xl hover:bg-white/30 transition-all">
                             {{ __('home.my_points') ?? 'رصيد نقاطي' }}
                         </a>
                     </div>
@@ -631,7 +631,7 @@
                 </a>
                 @guest
                     <a href="{{ route('register') }}"
-                        class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white hover:text-brand-dark text-white font-bold text-lg rounded-2xl shadow-xl transition-all duration-300">
+                        class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-white/20 backdrop-blur-sm border-2 border-white/50 hover:bg-white hover:text-brand-dark text-white font-bold text-lg rounded-2xl shadow-xl transition-all duration-300">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />

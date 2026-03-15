@@ -124,7 +124,7 @@
 
     {{-- Floating Chat Button --}}
     <button @click="toggle"
-        class="group fixed bottom-6 right-6 bg-gradient-to-br from-accent-DEFAULT via-accent-amber to-kairouan-brass hover:from-kairouan-brass hover:via-accent-amber hover:to-accent-DEFAULT text-white pl-6 pr-7 py-4 rounded-full shadow-2xl hover:shadow-accent-DEFAULT/40 flex items-center gap-3 font-bold transition-all duration-300 transform hover:scale-110 active:scale-95 border-2 border-white/20">
+        class="group fixed bottom-6 right-6 bg-accent-DEFAULT bg-gradient-to-br from-accent-DEFAULT via-accent-amber to-kairouan-brass hover:from-kairouan-brass hover:via-accent-amber hover:to-accent-DEFAULT text-white pl-6 pr-7 py-4 rounded-full shadow-2xl hover:shadow-accent-DEFAULT/60 flex items-center gap-3 font-bold transition-all duration-300 transform hover:scale-110 active:scale-95 border-2 border-white/40">
         <div class="relative">
             <svg class="w-7 h-7 transition-transform duration-300 group-hover:rotate-12" fill="none"
                 stroke="currentColor" viewBox="0 0 24 24">

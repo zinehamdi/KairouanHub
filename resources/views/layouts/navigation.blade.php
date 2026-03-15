@@ -137,7 +137,7 @@
                     @auth
                         @if(!auth()->user()->hasRole(['admin', 'superadmin']) && !auth()->user()->providerProfile)
                             <a href="{{ route('provider.start') }}"
-                                class="inline-flex items-center px-4 py-2.5 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-lg shadow-md transition-all duration-200 hover:shadow-lg backdrop-blur-sm border border-white/30">
+                                class="inline-flex items-center px-4 py-2.5 bg-white/30 hover:bg-white/40 text-white font-bold rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl backdrop-blur-md border-2 border-white/40">
                                 <svg class="w-5 h-5 mr-2 rtl:ml-2 rtl:mr-0" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -148,7 +148,7 @@
                         @endif
                     @else
                         <a href="{{ route('provider.start') }}"
-                            class="inline-flex items-center px-4 py-2.5 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-lg shadow-md transition-all duration-200 hover:shadow-lg backdrop-blur-sm border border-white/30">
+                            class="inline-flex items-center px-4 py-2.5 bg-white/30 hover:bg-white/40 text-white font-bold rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl backdrop-blur-md border-2 border-white/40">
                             <svg class="w-5 h-5 mr-2 rtl:ml-2 rtl:mr-0" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -165,7 +165,7 @@
                 <!-- Language Switcher -->
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open" type="button"
-                        class="inline-flex items-center px-3 py-2 border border-white/30 text-sm font-medium rounded-lg text-white bg-white/10 hover:bg-white/20 transition backdrop-blur-sm">
+                        class="inline-flex items-center px-3 py-2 border-2 border-white/40 text-sm font-bold rounded-lg text-white bg-white/20 hover:bg-white/30 transition backdrop-blur-md">
                         <svg class="w-5 h-5 mr-1.5 rtl:ml-1.5 rtl:mr-0" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -195,10 +195,10 @@
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
-                                class="inline-flex items-center px-4 py-2 border-2 border-white/30 text-sm font-medium rounded-xl text-white bg-white/10 hover:bg-white/20 focus:outline-none transition ease-in-out duration-150 backdrop-blur-sm">
+                                class="inline-flex items-center px-4 py-2 border-2 border-white/40 text-sm font-bold rounded-xl text-white bg-white/20 hover:bg-white/30 focus:outline-none transition ease-in-out duration-150 backdrop-blur-md shadow-lg">
                                 <div class="flex items-center gap-2">
                                     <div
-                                        class="w-8 h-8 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center text-white font-bold shadow-lg">
+                                        class="w-8 h-8 rounded-full bg-white/40 backdrop-blur-md flex items-center justify-center text-white font-black shadow-inner">
                                         {{ substr(Auth::user()->name, 0, 1) }}
                                     </div>
                                     <span>{{ Auth::user()->name }}</span>
@@ -246,7 +246,7 @@
                         </a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
-                                class="text-sm px-6 py-2.5 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-lg shadow-md transition-all duration-200 hover:shadow-lg backdrop-blur-sm border border-white/30">
+                                class="text-sm px-6 py-2.5 bg-white/30 hover:bg-white/40 text-white font-bold rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl backdrop-blur-md border-2 border-white/40">
                                 {{ __('nav.register') }}
                             </a>
                         @endif

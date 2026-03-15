@@ -182,7 +182,7 @@ class ProviderOnboardingController extends Controller
                 imagepng($dst, null, 8);
                 break;
             case 'webp':
-                imagewebp($dst, null, 85);
+                imagewebp($dst, null, 80);
                 break;
             default:
                 imagejpeg($dst, null, 85);
@@ -236,7 +236,7 @@ class ProviderOnboardingController extends Controller
                 imagepng($dst, $fullPath, 8);
                 break;
             case 'webp':
-                imagewebp($dst, $fullPath, 85);
+                imagewebp($dst, $fullPath, 80);
                 break;
             default:
                 // Fallback for others or just copy
@@ -292,7 +292,7 @@ class ProviderOnboardingController extends Controller
 
         // Encode to WEBP binary and store via Storage (supports testing fakes)
         ob_start();
-        imagewebp($dst, null, 90);
+        imagewebp($dst, null, 80);
         $binary = ob_get_clean();
         Storage::disk('public')->put($path, $binary);
 
