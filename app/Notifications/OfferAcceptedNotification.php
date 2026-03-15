@@ -19,8 +19,9 @@ class OfferAcceptedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Your offer was accepted')
-            ->line('Congratulations! Your offer has been accepted.')
-            ->action('View Request', route('requests.show', $this->offer->request_id));
+            ->subject('مبارك! عرضك تم قبوله')
+            ->line('العميل رضى بعرضك.')
+            ->line('تواصل معاه وقعدوا على التفاصيل.')
+            ->action('شوف الطلب', route('requests.show', $this->offer->request_id));
     }
 }

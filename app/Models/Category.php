@@ -34,4 +34,16 @@ class Category extends Model
     {
         return $this->hasMany(Service::class);
     }
+
+    /**
+     * Get localized name based on current locale
+     * AR: الاسم المترجم حسب اللغة الحالية
+     */
+    public function getLocalizedNameAttribute(): string
+    {
+        if (app()->getLocale() === 'ar' && !empty($this->name_ar)) {
+            return $this->name_ar;
+        }
+        return $this->name ?? '';
+    }
 }

@@ -44,7 +44,8 @@ class SubmissionController
 
             return (new ProviderResource($profile))
                 ->additional(['meta' => null])
-                ->response();
+                ->response()
+                ->setStatusCode(201);
         } catch (RuntimeException $e) {
             return response()->json([
                 'message' => $e->getMessage(),

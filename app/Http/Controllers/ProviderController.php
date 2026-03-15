@@ -16,12 +16,24 @@ class ProviderController extends Controller
 {
     public function __construct(private ProviderProfileRepositoryInterface $repo) {}
 
-    /** Index listing with filters (to be expanded later) */
+    /** 
+     * Index listing with filters.
+     * Service-first: if no context (search, service, category), redirect to services.
+     */
     public function index(Request $request)
     {
-        $filters = $request->only(['q','city','category','badge','rating']);
+        $filters = $request->only(['q', 'city', 'category', 'service', 'badge', 'rating']);
+        
+        // Service-first: require search context or filter
+        $hasContext = !empty($filters['q']) || !empty($filters['service']) || !empty($filters['category']);
+        
+        if (!$hasContext) {
+            return redirect()->route('services.index')
+                ->with('info', __('common.browse_services_first'));
+        }
+        
         $providers = $this->repo->paginateApproved($filters, 12);
-        return view('providers.index', compact('providers','filters'));
+        return view('providers.index', compact('providers', 'filters'));
     }
 
     /** Show provider public profile */

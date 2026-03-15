@@ -26,7 +26,22 @@ class ChatbotService
         $messages = [
             [
                 'role' => 'system',
-                'content' => 'You are KairouanHub Assistant, a helpful AI assistant for KairouanHub platform. KairouanHub is a comprehensive service marketplace platform in Kairouan, Tunisia, connecting service providers with customers. The platform offers various categories including restaurants, cafes, fast food, juice bars, bakery, agriculture products, livestock, olive oil products, honey products, traditional food, home services, beauty services, health services, education, transportation, and more. Always respond in a friendly, professional manner. If asked about services, categories, or how the platform works, provide helpful information. Support Arabic, French, and English languages.'
+                'content' => 'إنت مساعد KairouanHub الذكي. المنصة هاذي موجودة في القيروان، تونس، وتجمع بين مزودي الخدمات والناس اللي يحبو خدمات.
+
+المنصة فيها كل أنواع الخدمات:
+- الحرفيين: سباكة، كهرباء، نجارة، طلاء، بناء، تكييف
+- الصحة: أطباء، ممرضين، علاج طبيعي، تغذية
+- التعليم: دروس خصوصية، تعليم لغات، موسيقى
+- المحاماة والمحاسبة: محامين، محاسبين، استشارات
+- النقل: سواقين، توصيل، نقل أثاث
+- المطاعم والقهاوي: مطاعم تونسية، كوفي شوب، فاست فود، عصائر، حلويات
+- الفلاحة: زيت زيتون، عسل، خضر وغلة، منتجات تقليدية
+- الأحداث: تصوير، تنظيم حفلات، ديجي
+- الجمال: حلاقة، ماكياج، سبا
+
+القيروان مدينة تاريخية فيها الجامع الكبير وفيها تراث غني. المنصة حاليا تخدم غير في القيروان.
+
+جاوب دائما بالتونسي (الدارجة) بطريقة ودية ومحترمة. كون مختصر وواضح. إذا حد سألك على خدمة معينة، وجهو للمكان المناسب في المنصة.'
             ]
         ];
 
@@ -59,11 +74,11 @@ class ChatbotService
             
             // Check for specific error types
             if (str_contains($e->getMessage(), 'rate limit')) {
-                return "I apologize, but I've reached the API rate limit. Please try again in a few moments. In the meantime, I can help you explore KairouanHub services - we offer restaurants, cafes, fast food, agriculture products, and many more categories!";
+                return "سامحني، وصلت للحد الأقصى. جرب مرة أخرى بعد شوية. 😊\n\nفي الانتظار، تنجم تتصفح الخدمات والمزودين!";
             }
             
             if (str_contains($e->getMessage(), 'authentication') || str_contains($e->getMessage(), 'API key')) {
-                return "There's an issue with the API authentication. Please contact the administrator. Meanwhile, feel free to browse our services and categories!";
+                return "عندي مشكل تقني. تواصل مع الإدارة. في الوقت هذا، تنجم تشوف الخدمات المتوفرة!";
             }
             
             return $this->localFallback($userContent);
@@ -72,29 +87,58 @@ class ChatbotService
 
     protected function localFallback(string $input): string
     {
-        $trimmed = strtolower(trim($input));
+        $trimmed = mb_strtolower(trim($input));
         
-        // Smart responses based on keywords
+        // Smart responses based on keywords in Arabic and English
         if (empty($trimmed)) {
-            return "Hello! 👋 I'm the KairouanHub Assistant. I can help you with:\n\n🍽️ Restaurants & Cafes\n🌾 Agriculture & Food Products\n🏠 Home Services\n💇 Beauty & Health\n🚗 Transportation\n\nWhat would you like to know?";
+            return "أهلا! 👋 أنا مساعد KairouanHub.\n\nنقدر نعاونك في:\n🔧 حرفيين (سباكة، كهرباء، نجارة...)\n👨‍⚕️ أطباء ومختصين صحة\n📚 أساتذة ودروس خصوصية\n⚖️ محامين ومحاسبين\n🚗 سواقين وتوصيل\n🍽️ مطاعم وقهاوي\n\nشنوة تحب تعرف؟";
         }
         
-        if (str_contains($trimmed, 'service') || str_contains($trimmed, 'category') || str_contains($trimmed, 'خدمة')) {
-            return "KairouanHub offers comprehensive services including:\n\n✨ Food Services: Restaurants, cafes, fast food, juice bars, bakery\n🌾 Agriculture: Fresh produce, livestock, olive oil, honey\n🏠 Home: Cleaning, repairs, maintenance\n💇 Beauty & Health: Salons, spas, fitness\n📚 Education & Transportation\n\nWould you like details about any specific category?";
+        // Location questions
+        if (str_contains($trimmed, 'وين') || str_contains($trimmed, 'فين') || str_contains($trimmed, 'المكان') || str_contains($trimmed, 'location') || str_contains($trimmed, 'where')) {
+            return "المنصة حاليا تخدم غير في القيروان 📍\n\nالقيروان مدينة تاريخية فيها الجامع الكبير والمدينة العتيقة.\n\nإن شاء الله نتوسعو لمدن أخرى قريب!";
         }
         
-        if (str_contains($trimmed, 'food') || str_contains($trimmed, 'restaurant') || str_contains($trimmed, 'طعام')) {
-            return "Our food services include:\n\n🍽️ Traditional Tunisian cuisine\n☕ Coffee shops & cafes\n🍔 Fast food & delivery\n🥤 Fresh juice bars\n🥐 Bakery & pastries\n🫒 Olive oil products\n🍯 Natural honey\n\nAll from local providers in Kairouan!";
+        // Services questions
+        if (str_contains($trimmed, 'خدمة') || str_contains($trimmed, 'خدمات') || str_contains($trimmed, 'service') || str_contains($trimmed, 'شنوة عندكم')) {
+            return "عندنا خدمات متنوعة:\n\n🔧 حرفيين: سباكة، كهرباء، نجارة، طلاء، بناء\n👨‍⚕️ صحة: أطباء، ممرضين، علاج طبيعي\n📚 تعليم: دروس خصوصية، لغات\n⚖️ مهنيين: محامين، محاسبين\n🚗 نقل: سواقين، توصيل\n🍽️ مأكولات: مطاعم، قهاوي\n💇 جمال: حلاقة، سبا\n\nتحب تفاصيل على فئة معينة؟";
         }
         
-        if (str_contains($trimmed, 'agriculture') || str_contains($trimmed, 'farm') || str_contains($trimmed, 'زراعة')) {
-            return "Agricultural products available:\n\n🌾 Fresh vegetables & fruits\n🫒 Premium olive oil\n🍯 Natural honey & bee products\n🐄 Livestock & dairy\n🌿 Organic herbs\n\nSupporting local farmers in Kairouan!";
+        // Doctor/Medical questions
+        if (str_contains($trimmed, 'طبيب') || str_contains($trimmed, 'دكتور') || str_contains($trimmed, 'doctor') || str_contains($trimmed, 'صحة')) {
+            return "خدمات الصحة عندنا:\n\n👨‍⚕️ استشارات طبية\n💉 تمريض ورعاية منزلية\n🏥 علاج طبيعي\n🥗 تغذية وحميات\n💪 تدريب شخصي ولياقة\n\nتنجم تشوف المزودين وتطلب خدمة من الموقع!";
         }
         
-        if (str_contains($trimmed, 'how') || str_contains($trimmed, 'work') || str_contains($trimmed, 'كيف')) {
-            return "KairouanHub connects you with local service providers:\n\n1️⃣ Browse services & categories\n2️⃣ View provider profiles & reviews\n3️⃣ Request services directly\n4️⃣ Get matched with quality providers\n\nIt's easy, fast, and reliable!";
+        // Lawyer questions
+        if (str_contains($trimmed, 'محامي') || str_contains($trimmed, 'قانون') || str_contains($trimmed, 'lawyer')) {
+            return "عندنا خدمات قانونية:\n\n⚖️ محامين\n📝 استشارات قانونية\n📄 عقود ووثائق\n\nتنجم تشوف المحامين المتوفرين وتتواصل معاهم!";
         }
         
-        return "Thank you for your message! 😊\n\nI'm here to help you discover KairouanHub services. You can ask me about:\n- Available services & categories\n- Food & agriculture products\n- How the platform works\n- Specific service providers\n\nWhat would you like to know?";
+        // Teacher/Education questions
+        if (str_contains($trimmed, 'أستاذ') || str_contains($trimmed, 'معلم') || str_contains($trimmed, 'دروس') || str_contains($trimmed, 'teacher') || str_contains($trimmed, 'تعليم')) {
+            return "خدمات التعليم عندنا:\n\n📚 دروس خصوصية\n🗣️ تعليم لغات\n🎵 موسيقى وفنون\n🎓 تدريب مهني\n\nتنجم تلقى أستاذ حسب المادة اللي تحبها!";
+        }
+        
+        // Driver questions
+        if (str_contains($trimmed, 'سواق') || str_contains($trimmed, 'توصيل') || str_contains($trimmed, 'نقل') || str_contains($trimmed, 'driver') || str_contains($trimmed, 'transport')) {
+            return "خدمات النقل عندنا:\n\n🚗 سواقين شخصيين\n📦 توصيل طلبات\n🚚 نقل أثاث\n\nتوفر لك خدمة سريعة وموثوقة!";
+        }
+        
+        // Food questions
+        if (str_contains($trimmed, 'مطعم') || str_contains($trimmed, 'أكل') || str_contains($trimmed, 'طعام') || str_contains($trimmed, 'قهوة') || str_contains($trimmed, 'restaurant') || str_contains($trimmed, 'food')) {
+            return "خدمات المأكولات عندنا:\n\n🍽️ مطاعم تونسية تقليدية\n☕ قهاوي ومقاهي\n🍔 فاست فود وتوصيل\n🥤 عصائر طازجة\n🥐 حلويات ومخابز\n🫒 زيت زيتون\n🍯 عسل طبيعي\n\nكلها من منتجين محليين في القيروان!";
+        }
+        
+        // How it works
+        if (str_contains($trimmed, 'كيفاش') || str_contains($trimmed, 'how') || str_contains($trimmed, 'شلون') || str_contains($trimmed, 'work')) {
+            return "KairouanHub ساهل:\n\n1️⃣ تصفح الخدمات والفئات\n2️⃣ شوف ملفات المزودين وتقييماتهم\n3️⃣ اطلب الخدمة مباشرة\n4️⃣ تتواصل مع المزود وتتفاهمو\n\nسريع وموثوق! 💪";
+        }
+        
+        // Greeting
+        if (str_contains($trimmed, 'السلام') || str_contains($trimmed, 'مرحبا') || str_contains($trimmed, 'أهلا') || str_contains($trimmed, 'hello') || str_contains($trimmed, 'hi')) {
+            return "وعليكم السلام! 😊\n\nأهلا بيك في KairouanHub!\n\nشنوة تحب تسأل؟ نقدر نعاونك تلقى:\n- حرفيين\n- أطباء\n- أساتذة\n- محامين\n- سواقين\n- مطاعم\n\nوبرشة خدمات أخرى!";
+        }
+        
+        return "مرحبا! 😊\n\nنقدر نعاونك تلقى خدمات في القيروان:\n\n🔧 حرفيين\n👨‍⚕️ أطباء\n📚 أساتذة\n⚖️ محامين\n🚗 سواقين\n🍽️ مطاعم\n\nاسأل على أي فئة تحبها!";
     }
 }

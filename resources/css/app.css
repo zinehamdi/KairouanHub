@@ -115,6 +115,27 @@
         @apply text-white border-transparent;
     }
 
+    /* Gold/Amber Accent Button - Primary CTA */
+    .btn-accent {
+        @apply px-6 py-3 rounded-xl font-bold text-white shadow-lg;
+        @apply transition-all duration-300;
+        @apply hover:shadow-xl hover:scale-[1.02];
+        background: linear-gradient(135deg, #D4AF37 0%, #E8B545 100%) !important;
+    }
+
+    .btn-accent:hover {
+        background: linear-gradient(135deg, #E8B545 0%, #B87333 100%) !important;
+    }
+
+    /* Gold Gradient Background - for CTAs */
+    .bg-gold-gradient {
+        background: linear-gradient(to right, #D4AF37, #E8B545) !important;
+    }
+
+    .bg-gold-gradient-br {
+        background: linear-gradient(to bottom right, #D4AF37, #E8B545) !important;
+    }
+
     /* Input Fields */
     .input-mediterranean {
         @apply w-full px-4 py-3 rounded-xl;
@@ -244,6 +265,21 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Shimmer Animation for Metallic Text */
+@keyframes shimmer {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
     }
 }
 

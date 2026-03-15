@@ -24,15 +24,28 @@ class ProviderSubmissionProcessed extends Notification
 
     public function toArray($notifiable): array
     {
+        $providerName = $this->submission->provider_name;
+        
+        if ($this->status === 'approved') {
+            $message = $this->pointsEarned > 0
+                ? "مبارك عليك! اقتراحك على {$providerName} تم قبوله. ربحت {$this->pointsEarned} نقطة."
+                : "مبارك عليك! اقتراحك على {$providerName} تم قبوله.";
+        } else {
+            $reason = $this->submission->rejection_reason ?? '';
+            if ($reason) {
+                $message = "للأسف، اقتراحك على {$providerName} ما تمش. {$reason}";
+            } else {
+                $message = "للأسف، اقتراحك على {$providerName} ما تمش. ما تقلقش، في توصيات تانية تقدر توصي بيها.";
+            }
+        }
+
         return [
             'submission_id' => $this->submission->id,
-            'provider_name' => $this->submission->provider_name,
+            'provider_name' => $providerName,
             'status' => $this->status,
             'points_earned' => $this->pointsEarned,
             'trust_score_adjusted' => $this->trustScoreAdjusted,
-            'message' => $this->status === 'approved' 
-                ? "Excellent! Your suggestion for '{$this->submission->provider_name}' has been approved. You earned {$this->pointsEarned} points!"
-                : "Your suggestion for '{$this->submission->provider_name}' was not accepted: {$this->submission->rejection_reason}",
+            'message' => $message,
         ];
     }
 }

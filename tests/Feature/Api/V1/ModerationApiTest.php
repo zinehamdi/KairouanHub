@@ -55,7 +55,7 @@ class ModerationApiTest extends TestCase
 
         $response->assertStatus(201)
             ->assertJsonPath('data.phone', '+21620000000')
-            ->assertJsonPath('data.display_name', 'Provider A');
+            ->assertJsonPath('data.name', 'Provider A');
 
         $this->assertDatabaseHas('provider_profiles', ['user_id' => $user->id, 'phone' => '+21620000000']);
         $this->assertDatabaseHas('points_transactions', ['user_id' => $user->id, 'points' => 50, 'type' => 'earn']);

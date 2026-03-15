@@ -1,12 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('content')
-	<div class="min-h-screen bg-kairouan-warm-cream py-12">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+@section('admin-content')
+	<div class="py-8 px-4 sm:px-6 lg:px-8">
+		<div class="max-w-7xl mx-auto">
 			<!-- Header -->
 			<div class="mb-8">
-				<h1 class="text-4xl font-bold text-brand-dark mb-2">Admin Dashboard</h1>
-				<p class="text-gray-600">لوحة تحكم المشرف - إدارة المنصة</p>
+				<h1 class="text-3xl font-bold text-brand-dark mb-2">{{ __('admin.dashboard_title') }}</h1>
+				<p class="text-gray-600">{{ __('admin.dashboard_subtitle') }}</p>
 			</div>
 
 			<!-- Stats Grid -->
@@ -18,9 +18,9 @@
 							<p class="text-gray-600 text-sm font-medium">إجمالي المستخدمين</p>
 							<p class="text-3xl font-bold text-brand-dark mt-2">{{ $total_users }}</p>
 						</div>
-				<div class="w-16 h-16 rounded-full flex items-center justify-center"
-					 style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
-					<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<div class="w-16 h-16 rounded-full flex items-center justify-center"
+							style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
+							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 									d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
 							</svg>
@@ -35,9 +35,9 @@
 							<p class="text-gray-600 text-sm font-medium">مقدمو الخدمات</p>
 							<p class="text-3xl font-bold text-brand-dark mt-2">{{ $total_providers }}</p>
 						</div>
-				<div class="w-16 h-16 rounded-full flex items-center justify-center"
-					 style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
-					<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<div class="w-16 h-16 rounded-full flex items-center justify-center"
+							style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
+							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 									d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
 							</svg>
@@ -52,11 +52,11 @@
 							<p class="text-gray-600 text-sm font-medium">إجمالي الخدمات</p>
 							<p class="text-3xl font-bold text-brand-dark mt-2">{{ $total_services }}</p>
 						</div>
-				<div class="w-16 h-16 rounded-full flex items-center justify-center"
-					 style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
-					<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-							d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+						<div class="w-16 h-16 rounded-full flex items-center justify-center"
+							style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
+							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+									d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
 							</svg>
 						</div>
 					</div>
@@ -69,9 +69,9 @@
 							<p class="text-gray-600 text-sm font-medium">الفئات</p>
 							<p class="text-3xl font-bold text-brand-dark mt-2">{{ $total_categories }}</p>
 						</div>
-				<div class="w-16 h-16 rounded-full flex items-center justify-center"
-					 style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
-					<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<div class="w-16 h-16 rounded-full flex items-center justify-center"
+							style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
+							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 									d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
 							</svg>
@@ -86,9 +86,9 @@
 							<p class="text-gray-600 text-sm font-medium">إجمالي الطلبات</p>
 							<p class="text-3xl font-bold text-brand-dark mt-2">{{ $total_requests }}</p>
 						</div>
-				<div class="w-16 h-16 rounded-full flex items-center justify-center"
-					 style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
-					<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<div class="w-16 h-16 rounded-full flex items-center justify-center"
+							style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
+							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 									d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
 							</svg>
@@ -115,25 +115,31 @@
 
 			<!-- Quick Actions -->
 			<div class="mb-8">
-				<h2 class="text-2xl font-bold text-brand-dark mb-4">إجراءات سريعة</h2>
+				<h2 class="text-2xl font-bold text-brand-dark mb-4">{{ __('admin.quick_actions') }}</h2>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 					<a href="{{ route('admin.categories.index') }}" class="btn-mediterranean text-center">
-						إدارة الفئات
+						{{ __('admin.manage_categories') }}
 					</a>
 					<a href="{{ route('admin.services.index') }}" class="btn-terracotta text-center">
-						إدارة الخدمات
+						{{ __('admin.manage_services') }}
 					</a>
 					<a href="{{ route('admin.providers.index') }}" class="btn-terracotta text-center">
-						إدارة مزودي الخدمات
+						{{ __('admin.manage_providers') }}
 					</a>
-					<a href="{{ route('services.index') }}" class="btn-outline-mediterranean text-center">
-						عرض الخدمات
+					<a href="{{ route('admin.submissions.index') }}" class="btn-terracotta text-center relative">
+						{{ __('admin.provider_suggestions') }}
+						@if(isset($pending_submissions) && $pending_submissions > 0)
+							<span
+								class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center">
+								{{ $pending_submissions }}
+							</span>
+						@endif
 					</a>
 				</div>
 			</div>
 
 			<!-- Recent Activity -->
-			<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+			<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 				<!-- Recent Users -->
 				<div class="card-mediterranean p-6">
 					<h3 class="text-xl font-bold text-brand-dark mb-4">آخر المستخدمين</h3>
@@ -141,10 +147,10 @@
 						@forelse($recent_users as $user)
 							<div class="flex items-center justify-between p-3 bg-kairouan-warm-cream rounded-lg">
 								<div class="flex items-center gap-3">
-								<div class="w-10 h-10 rounded-full flex items-center justify-center"
-									 style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
-									<span class="text-white font-bold">{{ substr($user->name, 0, 1) }}</span>
-								</div>
+									<div class="w-10 h-10 rounded-full flex items-center justify-center"
+										style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
+										<span class="text-white font-bold">{{ substr($user->name, 0, 1) }}</span>
+									</div>
 									<div>
 										<p class="font-semibold text-brand-dark">{{ $user->name }}</p>
 										<p class="text-sm text-gray-600">{{ $user->email }}</p>
@@ -177,6 +183,42 @@
 							<p class="text-gray-500 text-center py-4">لا توجد طلبات</p>
 						@endforelse
 					</div>
+				</div>
+
+				<!-- Recent Provider Suggestions -->
+				<div class="card-mediterranean p-6">
+					<h3 class="text-xl font-bold text-brand-dark mb-4">
+						Provider Suggestions
+						@if(isset($pending_submissions) && $pending_submissions > 0)
+							<span class="bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 ml-2">
+								{{ $pending_submissions }} pending
+							</span>
+						@endif
+					</h3>
+					<div class="space-y-3">
+						@forelse($recent_submissions ?? [] as $submission)
+							<div class="p-3 bg-kairouan-warm-cream rounded-lg">
+								<div class="flex items-center justify-between mb-2">
+									<p class="font-semibold text-brand-dark">{{ $submission->provider_name }}</p>
+									<span
+										class="badge-{{ $submission->status === 'pending' ? 'terracotta' : ($submission->status === 'approved' ? 'blue' : 'gray') }}">
+										{{ ucfirst($submission->status) }}
+									</span>
+								</div>
+								<p class="text-sm text-gray-600">{{ $submission->phone }}</p>
+								<p class="text-xs text-gray-500 mt-1">{{ $submission->created_at->diffForHumans() }}</p>
+							</div>
+						@empty
+							<p class="text-gray-500 text-center py-4">No suggestions</p>
+						@endforelse
+					</div>
+					@if(isset($pending_submissions) && $pending_submissions > 0)
+						<div class="mt-4">
+							<a href="{{ route('admin.submissions.index') }}" class="btn-terracotta w-full text-center">
+								Review All Suggestions
+							</a>
+						</div>
+					@endif
 				</div>
 			</div>
 		</div>

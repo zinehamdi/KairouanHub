@@ -96,11 +96,13 @@
                         <!-- City -->
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-2">
-                                {{ __('City / Location') }} <span class="text-red-500">*</span>
+                                {{ __('المدينة / الموقع') }} <span class="text-red-500">*</span>
                             </label>
-                            <input type="text" name="city" required maxlength="120" value="{{ old('city') }}"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-base"
-                                placeholder="{{ __('e.g. Kairouan, Sousse, Tunis...') }}">
+                            <select name="city" required
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-base">
+                                <option value="القيروان" selected>القيروان</option>
+                            </select>
+                            <p class="mt-2 text-sm text-gray-500">{{ __('حاليا نخدمو غير في القيروان 📍') }}</p>
                             @error('city')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                             @enderror

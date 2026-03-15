@@ -4,8 +4,8 @@ return [
     'name' => 'التصنيف',
     'description' => 'الوصف',
     'position' => 'الترتيب',
-    'active' => 'مفعل',
+    'active' => 'نشط',
     'all' => 'كل التصنيفات',
-    'create_title' => 'إنشاء تصنيف',
-    'edit_title' => 'تعديل تصنيف',
+    'create_title' => 'زيد تصنيف',
+    'edit_title' => 'عدل تصنيف',
 ];

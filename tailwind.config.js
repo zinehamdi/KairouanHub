@@ -12,6 +12,26 @@ export default {
         './resources/js/**/*.js',
     ],
 
+    // Safelist ensures these classes are always generated
+    safelist: [
+        'from-accent-DEFAULT',
+        'to-accent-DEFAULT',
+        'from-accent-amber',
+        'to-accent-amber',
+        'from-accent-copper',
+        'to-accent-copper',
+        'bg-accent-DEFAULT',
+        'bg-accent-amber',
+        'text-accent-DEFAULT',
+        'text-accent-amber',
+        'border-accent-DEFAULT',
+        'bg-gradient-to-r',
+        'bg-gradient-to-br',
+        'bg-gradient-to-b',
+        'hover:from-accent-amber',
+        'hover:to-accent-copper',
+    ],
+
 
     theme: {
         extend: {
@@ -45,6 +65,9 @@ export default {
                     copper: '#B87333',         // Copper/brass
                     burgundy: '#8B2635',       // Burgundy accent
                 },
+                // Premium background colors for sections
+                'deep-blue': '#0C1929',        // Deep navy blue
+                'mediterranean-blue': '#1B3A5C', // Mediterranean dark blue
             },
             backgroundImage: {
                 'kairouan-pattern': "url('/images/kairouan-background.jpg')",

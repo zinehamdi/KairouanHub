@@ -1,12 +1,22 @@
 <?php
 return [
-    'title' => 'إعداد المزود',
-    'step1' => ['title' => 'معلومات الملف'],
-    'step2' => ['title' => 'اختيار الخدمات'],
-    'step3' => ['title' => 'رفع الصور'],
+    'title' => 'سجل كمزود',
+    'step1' => ['title' => 'معلوماتك'],
+    'step2' => ['title' => 'خدماتك'],
+    'step3' => ['title' => 'صورك'],
     'fields' => [
-        'display_name' => 'الاسم المعروض', 'city' => 'المدينة', 'bio' => 'الوصف', 'website' => 'الموقع', 'skills' => 'المهارات', 'cities' => 'المدن', 'social' => 'روابط اجتماعية'
+        'display_name' => 'اسمك',
+        'city' => 'المدينة',
+        'bio' => 'حكينا عنك',
+        'website' => 'موقعك',
+        'skills' => 'مهاراتك',
+        'cities' => 'المدن',
+        'social' => 'روابط',
     ],
     'buttons' => ['next' => 'التالي', 'upload' => 'رفع', 'save' => 'حفظ'],
-    'status' => ['pending' => 'قيد المراجعة', 'approved' => 'مقبول', 'rejected' => 'مرفوض'],
+    'status' => [
+        'pending' => 'رانا نتحققوا',
+        'approved' => 'مقبول',
+        'rejected' => 'مرفوض',
+    ],
 ];

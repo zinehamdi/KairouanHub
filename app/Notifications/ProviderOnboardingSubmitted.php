@@ -21,8 +21,10 @@ class ProviderOnboardingSubmitted extends Notification
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Provider Onboarding Submitted')
-            ->line('Your provider profile has been submitted and is pending review.')
-            ->action('View Dashboard', url(route('provider.dashboard')));
+            ->subject('تم تسجيلك في KairouanHub!')
+            ->line('مرحبا بك في المجتمع!')
+            ->line('ملفك الشخصي جاهز ورانا نتحققوا منه قريباً.')
+            ->line('بعد الموافقة، فيك تبدأ تتلقى طلبات.')
+            ->action('شوف ملفك', url(route('provider.dashboard')));
     }
 }

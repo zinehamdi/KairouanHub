@@ -1,108 +1,136 @@
 <?php
 
 return [
-    'welcome' => 'مرحبًا بعودتك، :name!',
+    'welcome' => 'مرحبا بعودتك، :name!',
     'manage_profile' => 'إدارة ملفك الشخصي وخدماتك',
     
-    // Sidebar
+    // User dashboard - welcome section
+    'explore_services' => 'اكتشف الخدمات واطلب شنوة تحب',
+    'create_request' => 'اطلب خدمة',
+    'request_subtitle' => 'احكينا شنوة تحب وخلينا نساعدوك',
+    'browse_services' => 'تصفح الخدمات',
+    'services_subtitle' => 'شوف الخدمات المتوفرة',
+    'become_provider' => 'تحب تقدم خدمات',
+    'provider_subtitle' => 'انضم للمجتمع واربح أكثر',
+    
+    // Sidebar - simple, direct
     'sidebar' => [
-        'profile' => 'معلومات الملف الشخصي',
-        'services' => 'الخدمات',
-        'gallery' => 'المعرض',
+        'profile' => 'معلوماتي',
+        'services' => 'خدماتي',
+        'gallery' => 'الصور',
         'settings' => 'الإعدادات',
     ],
     
-    // Stats
+    // Stats - friendly labels
     'stats' => [
-        'services_offered' => 'الخدمات المقدمة',
+        'services_offered' => 'خدماتك',
         'active_services' => 'خدمات نشطة',
-        'completed_jobs' => 'الأعمال المنجزة',
+        'completed_jobs' => 'شغل مكتمل',
         'successful_deliveries' => 'تسليمات ناجحة',
-        'average_rating' => 'متوسط التقييم',
-        'out_of' => 'من 5.00',
+        'average_rating' => 'التقييم',
+        'out_of' => 'من 5',
+        'rating' => 'التقييم',
+        'services_label' => 'الخدمات',
+        'completed_label' => 'مكتمل',
+        'not_available' => 'ما فماش',
     ],
     
-    // Profile Section
+    // Tabs
+    'tabs' => [
+        'about' => 'عني',
+        'services' => 'الخدمات',
+        'gallery' => 'الصور',
+    ],
+    
+    // Profile Section - conversational
     'profile' => [
-        'title' => 'معلومات الملف الشخصي',
-        'subtitle' => 'تفاصيل ملفك العام',
-        'display_name' => 'الاسم المعروض',
-        'location' => 'الموقع',
-        'about' => 'نبذة',
-        'website' => 'الموقع الإلكتروني',
-        'profile_photo' => 'صورة الملف الشخصي',
+        'title' => 'معلوماتك',
+        'subtitle' => 'ملفك العام',
+        'display_name' => 'اسمك',
+        'location' => 'وين',
+        'about' => 'عنا',
+        'website' => 'الموقع',
+        'profile_photo' => 'صورتك',
         'upload_photo' => 'رفع صورة',
-        'save_changes' => 'حفظ التغييرات',
-        'bio_placeholder' => 'أخبرنا عن خدماتك وخبرتك...',
+        'save_changes' => 'حفظ',
+        'bio_placeholder' => 'حكينا على خدماتك وخبرتك...',
+        'about_me' => 'عني',
+        'no_bio' => 'ما كتبتش ',
+        'add_bio' => 'زيد تعريف',
     ],
     
     // Services Section
     'services' => [
         'title' => 'خدماتك',
-        'subtitle' => 'الخدمات التي تقدمها مع الأسعار',
-        'no_services' => 'لم تتم إضافة خدمات بعد',
-        'edit_services' => 'تعديل الخدمات',
-        'add_service' => 'إضافة خدمة',
+        'subtitle' => 'الخدمات اللي تقدمها مع الأسعار',
+        'no_services' => 'ما عندكش خدمات بعد',
+        'edit_services' => 'عدل الخدمات',
+        'add_service' => 'زيد خدمة',
     ],
     
     // Gallery Section
     'gallery' => [
-        'title' => 'المعرض',
-        'subtitle' => 'صور الأعمال',
-        'no_photos' => 'لا توجد صور بعد',
-        'manage_photos' => 'إدارة الصور',
+        'title' => 'الصور',
+        'subtitle' => 'صور شغلك',
+        'no_photos' => 'ما فيش صور',
+        'manage_photos' => 'دير الصور',
         'upload_photos' => 'رفع صور',
-        'more_photos' => '+:count صور إضافية',
+        'more_photos' => '+:count صور',
     ],
     
-    // Quick Actions
+    // Quick Actions - friendly, action-oriented
     'actions' => [
         'title' => 'إجراءات سريعة',
-        'subtitle' => 'إدارة ملفك الشخصي',
-        'edit_profile' => 'تعديل الملف الشخصي',
-        'update_info' => 'تحديث معلوماتك',
-        'view_public' => 'عرض الملف العام',
-        'see_how_others' => 'شاهد كيف يراك الآخرون',
-        'back_home' => 'العودة للرئيسية',
-        'browse_platform' => 'تصفح المنصة',
+        'subtitle' => 'دير ملفك',
+        'edit_profile' => 'عدل ملفك',
+        'update_info' => 'حدّث معلوماتك',
+        'view_public' => 'شوف ملفك العام',
+        'see_how_others' => 'شوف كيف يشوفوك الناس',
+        'back_home' => 'رجوع للرئيسية',
+        'browse_platform' => 'تصفح الموقع',
     ],
     
-    // Messages
+    // Messages - natural, friendly
     'messages' => [
-        'profile_updated' => 'تم تحديث الملف الشخصي بنجاح!',
-        'photo_uploaded' => 'تم تحديث صورة الملف الشخصي بنجاح!',
-        'no_profile' => 'لم يتم العثور على ملف شخصي',
-        'no_profile_text' => 'لم تقم بإنشاء ملف مزود خدمة بعد.',
-        'create_now' => 'أنشئ ملفك الآن',
+        'profile_updated' => 'تم تحديث ملفك!',
+        'photo_uploaded' => 'تم تحديث صورتك!',
+        'no_profile' => 'ما لقيناش ملف',
+        'no_profile_text' => 'ما عملتش ملف مزود بعد.',
+        'create_now' => 'اعملو تو',
     ],
 
-    // Modals & Forms
+    // Modals & Forms - simple, clear
     'modals' => [
-        'add_service_title' => 'إضافة خدمة جديدة',
+        'add_service_title' => 'زيد خدمة جديدة',
         'select_service' => 'اختر الخدمة',
-        'choose_service' => 'اختر خدمة...',
+        'choose_service' => 'اختر...',
         'min_price' => 'أقل سعر (د.ت)',
-        'max_price' => 'أقصى سعر (د.ت)',
+        'max_price' => 'أعلى سعر (د.ت)',
         'optional' => 'اختياري',
-        'price_tip' => '💡 نصيحة: اترك الأسعار فارغة إذا كنت تفضل تحديد السعر عند الطلب',
-        'add_btn' => 'إضافة الخدمة',
+        'price_tip' => '💡 نصيحة: اترك الأسعار فاضية إذا بتحب تحدد السعر عند الطلب',
+        'add_btn' => 'زيد الخدمة',
         'cancel_btn' => 'إلغاء',
-        'edit_pricing_title' => 'تعديل تسعير :service',
-        'update_pricing_btn' => 'تحديث التسعير',
-        'upload_title' => 'رفع صور المعرض',
+        'edit_pricing_title' => 'عدل سعر :service',
+        'update_pricing_btn' => 'حدّث السعر',
+        'upload_title' => 'رفع صور',
         'click_upload' => 'اضغط للرفع',
-        'drag_drop' => 'أو اسحب وأفلت الملفات',
-        'file_selected' => 'تم اختيار :count ملف(ات)',
+        'drag_drop' => 'أو اسحب وفلت',
+        'file_selected' => 'تم اختيار :count ملف',
         'upload_btn' => 'رفع الصور',
-        'delete_confirm' => 'هل أنت متأكد أنك تريد حذف هذه الصورة؟',
-        'remove_service_confirm' => 'هل أنت متأكد أنك تريد إزالة هذه الخدمة؟',
-        'remove_btn' => 'إزالة الخدمة',
-        'view_btn' => 'عرض',
+        'delete_confirm' => 'متأكد تحذف هذه الصورة؟',
+        'remove_service_confirm' => 'متأكد تحذف هذه الخدمة؟',
+        'remove_btn' => 'حذف الخدمة',
+        'view_btn' => 'شوف',
         'delete_btn' => 'حذف',
-        'edit_pricing_btn' => 'تعديل التسعير',
-        'add_first_service' => 'أضف خدمتك الأولى',
-        'no_services_desc' => 'لم تتم إضافة خدمات بعد',
-        'no_gallery_desc' => 'لا توجد صور في المعرض بعد',
-        'gallery_tip' => 'اعرض أعمالك من خلال رفع صور للمعرض',
+        'edit_pricing_btn' => 'عدل السعر',
+        'add_first_service' => 'زيد أول خدمة',
+        'no_services_desc' => 'ما فيش خدمات',
+        'no_gallery_desc' => 'ما فيش صور',
+        'gallery_tip' => 'اعرض شغلك برفع صور',
+        'upload_avatar' => 'رفع صورة جديدة',
+        'upload_photo_btn' => 'رفع الصورة',
+        'file_hint' => 'PNG، JPG، WEBP أكثر حد 10MB',
+        'max_photos' => 'أكثر حد :count صور',
+        'photos_uploaded' => ':count / :max صورة',
     ],
 ];

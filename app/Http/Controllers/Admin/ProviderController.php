@@ -88,7 +88,7 @@ class ProviderController extends Controller
 
     public function show(ProviderProfile $provider)
     {
-        $provider->load(['user', 'services.category', 'reviews']);
+        $provider->load(['user', 'services.category']);
         return view('admin.providers.show', compact('provider'));
     }
 
@@ -197,5 +197,139 @@ class ProviderController extends Controller
         ]);
 
         return back()->with('success', 'Provider rejected successfully!');
+    }
+
+    /**
+     * Show the map import interface.
+     * This is an optional feature - dashboard works without it.
+     */
+    public function mapImport()
+    {
+        $categories = \App\Models\Category::orderBy('name')->get();
+        
+        return view('admin.providers.map-import', compact('categories'));
+    }
+
+    /**
+     * Search for places from the map (AJAX).
+     * Returns preview data only - nothing is saved.
+     */
+    public function searchFromMap(Request $request)
+    {
+        try {
+            $placesService = app(\App\Services\GooglePlacesService::class);
+            
+            $query = $request->input('query');
+            $lat = $request->input('lat', 35.6781); // Kairouan default
+            $lng = $request->input('lng', 10.0963);
+            $radius = $request->input('radius', 5000);
+
+            if ($query) {
+                // Text search
+                $results = $placesService->searchPlaces($query, [
+                    'location' => "{$lat},{$lng}",
+                    'radius' => $radius,
+                ]);
+            } else {
+                // Nearby search (when clicking on map)
+                $results = $placesService->searchPlaces('*', [
+                    'location' => "{$lat},{$lng}",
+                    'radius' => $radius,
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'results' => $results,
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Map search error: ' . $e->getMessage());
+            
+            return response()->json([
+                'success' => false,
+                'message' => __('admin.search_error', ['default' => 'Unable to search. Please try again.']),
+            ], 200); // Return 200 to handle gracefully in frontend
+        }
+    }
+
+    /**
+     * Confirm and create provider from reviewed data.
+     * This is the only place where data is actually saved.
+     */
+    public function confirmImport(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:50',
+            'address' => 'nullable|string|max:500',
+            'city' => 'nullable|string|max:100',
+            'website' => 'nullable|url|max:255',
+            'category_id' => 'nullable|exists:categories,id',
+            'rating' => 'nullable|numeric|min:0|max:5',
+            'lat' => 'nullable|numeric',
+            'lng' => 'nullable|numeric',
+            'place_id' => 'nullable|string',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            // Generate a unique email for the imported provider
+            $slug = \Str::slug($validated['name']);
+            $uniqueId = \Str::random(6);
+            $email = "imported.{$slug}.{$uniqueId}@kairouanhub.local";
+
+            // Create user account
+            $user = User::create([
+                'name' => $validated['name'],
+                'email' => $email,
+                'password' => Hash::make(\Str::random(16)), // Random password
+                'email_verified_at' => now(),
+            ]);
+
+            // Assign provider role
+            $user->assignRole('provider');
+
+            // Store Google data as metadata
+            $socialJson = [];
+            if ($validated['lat'] && $validated['lng']) {
+                $socialJson['coordinates'] = [
+                    'lat' => $validated['lat'],
+                    'lng' => $validated['lng'],
+                ];
+            }
+            if ($validated['place_id'] ?? null) {
+                $socialJson['google_place_id'] = $validated['place_id'];
+            }
+
+            // Create provider profile
+            $profile = ProviderProfile::create([
+                'user_id' => $user->id,
+                'display_name' => $validated['name'],
+                'phone' => $validated['phone'] ?? null,
+                'city' => $validated['city'] ?? 'Kairouan',
+                'category_id' => $validated['category_id'] ?? null,
+                'website' => $validated['website'] ?? null,
+                'avg_rating' => $validated['rating'] ?? null,
+                'social_json' => !empty($socialJson) ? $socialJson : null,
+                'status' => 'approved', // Auto-approve imported providers
+                'bio' => __('admin.imported_from_google', ['default' => 'Imported from Google Maps']),
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => __('admin.provider_imported', ['name' => $validated['name'], 'default' => "Provider '{$validated['name']}' imported successfully!"]),
+                'provider_id' => $profile->id,
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Import error: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => __('admin.import_failed', ['default' => 'Failed to import provider. Please try again.']),
+            ], 200);
+        }
     }
 }

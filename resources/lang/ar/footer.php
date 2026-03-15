@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'copyright' => '© :year قيروان هب. جميع الحقوق محفوظة.',
+    'copyright' => 'منذ 2023 © KairouanHub. كل الحقوق محفوظة.',
     'links' => [
         'home' => 'الرئيسية',
         'services' => 'الخدمات',
-        'providers' => 'مقدمو الخدمات',
+        'suggest_provider' => 'اقترح مزود',
     ],
 ];

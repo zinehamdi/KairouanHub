@@ -1,16 +1,30 @@
 <?php
 return [
     'welcome' => 'مرحبا بك في KairouanHub',
-    'logout' => 'تسجيل الخروج',
-    'login' => 'تسجيل الدخول',
-    'register' => 'إنشاء حساب',
+    'logout' => 'اخرج',
+    'login' => 'ادخل',
+    'register' => 'سجل',
     
-    // Chatbot
-    'KairouanHub Assistant' => 'مساعد القيروان هب',
-    'How can I help you today?' => 'كيف يمكنني مساعدتك اليوم؟',
+    // Universal labels
+    'language' => 'اللغة',
+    'back_home' => 'رجوع للرئيسية',
+    'loading' => 'يحمل...',
+    'error' => 'صار مشكل',
+    'success' => 'تم!',
+    'warning' => 'انتبه',
+    'info' => 'معلومة',
+    'close' => 'اغلق',
+    'confirm' => 'متأكد',
+    'browse_services_first' => 'تصفح الخدمات باش تلقى المزودين المناسبين',
+    'yes' => 'ايه',
+    'no' => 'لا',
+    
+    // Chatbot - friendly, conversational
+    'KairouanHub Assistant' => 'مساعد KairouanHub',
+    'How can I help you today?' => 'فاش نعاونك اليوم؟',
     'Type your message...' => 'اكتب رسالتك...',
-    'Send' => 'إرسال',
-    'Chat' => 'محادثة',
-    'AI Powered' => 'مدعوم بالذكاء الاصطناعي',
-    'Ask me anything about KairouanHub services' => 'اسألني أي شيء عن خدمات القيروان هب',
+    'Send' => 'ابعث',
+    'Chat' => 'حدّث',
+    'AI Powered' => 'مباشر بالذكاء الاصطناعي',
+    'Ask me anything about KairouanHub services' => 'اسألني على أي خدمة في KairouanHub',
 ];

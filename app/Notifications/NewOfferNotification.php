@@ -19,8 +19,9 @@ class NewOfferNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('New offer on your request')
-            ->line('A provider submitted a new offer.')
-            ->action('View Request', route('requests.show', $this->offer->request_id));
+            ->subject('في عرض جديد على طلبك!')
+            ->line('مزود خدمة بعثلك عرض جديد.')
+            ->line('شوف التفاصيل وتواصل معاه.')
+            ->action('شوف الطلب', route('requests.show', $this->offer->request_id));
     }
 }

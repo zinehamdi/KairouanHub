@@ -66,8 +66,15 @@ class ProviderOnboardingController extends Controller
         // Create new profile
         $profile = $this->repo->createForUser(Auth::id(), $payload);
         
+        $user = Auth::user();
+        
+        // According to plan: Allow any user to upgrade to provider instantly (no admin approval required)
+        // Assign provider role immediately when profile is created
+        if (!$user->hasRole('provider')) {
+            $user->assignRole('provider');
+        }
+        
         if($profile->status === 'pending') {
-            $user = Auth::user();
             Notification::send($user, new ProviderOnboardingSubmitted($profile));
             $admins = \App\Models\User::role('admin')->get();
             Notification::send($admins, new NewProviderPendingApproval($profile));
@@ -126,8 +133,8 @@ class ProviderOnboardingController extends Controller
                 $filename = Str::uuid() . '.webp';
                 $path = 'providers/' . Auth::id() . '/gallery/' . $filename;
                 
-                // Resize and convert to WebP
-                $this->resizeAndSaveImage($file, $path);
+                // Use Storage facade for test compatibility (Storage::fake works)
+                $this->resizeAndSaveImageToStorage($file, $path);
                 
                 $paths[] = $path;
             }
@@ -135,6 +142,57 @@ class ProviderOnboardingController extends Controller
         
         $this->repo->appendPhotos($profile, $paths, config('appsettings.providers.max_gallery', 6));
         return redirect()->route('provider.dashboard')->with('success', __('messages.uploaded'));
+    }
+
+    /**
+     * Resize and save image using Storage facade for test compatibility
+     */
+    private function resizeAndSaveImageToStorage($file, $path)
+    {
+        list($width, $height) = getimagesize($file);
+        $maxWidth = 1024;
+        
+        if ($width > $maxWidth) {
+            $ratio = $maxWidth / $width;
+            $newWidth = $maxWidth;
+            $newHeight = $height * $ratio;
+        } else {
+            $newWidth = $width;
+            $newHeight = $height;
+        }
+        
+        $src = imagecreatefromstring(file_get_contents($file));
+        $dst = imagecreatetruecolor((int)$newWidth, (int)$newHeight);
+        
+        // Preserve transparency for PNG/WEBP
+        imagealphablending($dst, false);
+        imagesavealpha($dst, true);
+        
+        imagecopyresampled($dst, $src, 0, 0, 0, 0, (int)$newWidth, (int)$newHeight, $width, $height);
+        
+        // Encode to binary and use Storage facade (works with Storage::fake)
+        $extension = strtolower($file->getClientOriginalExtension());
+        ob_start();
+        switch ($extension) {
+            case 'jpeg':
+            case 'jpg':
+                imagejpeg($dst, null, 85);
+                break;
+            case 'png':
+                imagepng($dst, null, 8);
+                break;
+            case 'webp':
+                imagewebp($dst, null, 85);
+                break;
+            default:
+                imagejpeg($dst, null, 85);
+        }
+        $binary = ob_get_clean();
+        
+        Storage::disk('public')->put($path, $binary);
+        
+        imagedestroy($src);
+        imagedestroy($dst);
     }
 
     private function resizeAndSaveImage($file, $path)

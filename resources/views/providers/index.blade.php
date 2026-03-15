@@ -12,7 +12,7 @@
 @endphp
 
 <!-- Providers Header Section -->
-<div class="relative bg-gradient-to-r from-accent-DEFAULT to-accent-amber py-20">
+<div class="relative bg-gold-gradient py-20">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10">
             <h1 class="text-5xl md:text-6xl font-heading font-bold text-white mb-6">
@@ -46,12 +46,13 @@
                         <label class="block text-sm font-bold text-brand-dark mb-2">
                             {{ __('providers.filters.city') }}
                         </label>
-                        <input 
+                        <select 
                             name="city" 
-                            value="{{ $filters['city'] ?? '' }}" 
-                            placeholder="{{ __('providers.filters.city_placeholder') }}" 
                             class="input-mediterranean"
-                        />
+                        >
+                            <option value="">{{ __('كل المناطق') }}</option>
+                            <option value="القيروان" {{ ($filters['city'] ?? '') == 'القيروان' ? 'selected' : '' }}>القيروان</option>
+                        </select>
                     </div>
 
                     <!-- Category Filter -->
@@ -129,7 +130,7 @@
         @if($providers->count() > 0)
             <!-- Providers Count Badge -->
             <div class="mb-8 text-center">
-                <div class="inline-block px-8 py-4 bg-gradient-to-r from-accent-DEFAULT to-accent-amber text-white font-bold text-lg rounded-full shadow-soft">
+                <div class="inline-block px-8 py-4 bg-gold-gradient text-white font-bold text-lg rounded-full shadow-soft">
                     👥 {{ __('providers.providers_available', ['count' => $providers->total()]) }}
                 </div>
             </div>
@@ -160,7 +161,7 @@
 
                         <!-- Avatar -->
                         <div class="absolute -bottom-12 left-1/2 -translate-x-1/2">
-                            <div class="w-24 h-24 rounded-full bg-gradient-to-r from-accent-DEFAULT to-accent-amber flex items-center justify-center shadow-soft border-4 border-white">
+                            <div class="w-24 h-24 rounded-full bg-gold-gradient flex items-center justify-center shadow-soft border-4 border-white">
                                 <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
                                 </svg>

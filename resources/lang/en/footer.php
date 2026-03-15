@@ -5,6 +5,6 @@ return [
     'links' => [
         'home' => 'Home',
         'services' => 'Services',
-        'providers' => 'Providers',
+        'suggest_provider' => 'Suggest a Provider',
     ],
 ];

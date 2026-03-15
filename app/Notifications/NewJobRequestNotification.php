@@ -21,9 +21,12 @@ class NewJobRequestNotification extends Notification
 
     public function toMail(object $notifiable): MailMessage
     {
+        $city = $this->request->city ?? 'مدينتك';
+        
         return (new MailMessage)
-            ->subject('New job request available')
-            ->line('A new job request was posted in your category/city.')
-            ->action('View Request', route('requests.show', $this->request->id));
+            ->subject('في طلب خدمة جديد')
+            ->line("في شخص في {$city} محتاج خدمتك.")
+            ->line('شوف التفاصيل وابعثلو عرض.')
+            ->action('شوف الطلب', route('requests.show', $this->request->id));
     }
 }

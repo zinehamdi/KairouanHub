@@ -17,7 +17,7 @@ class Service extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_id', 'name', 'name_ar', 'slug', 'summary', 'is_active',
+        'category_id', 'name', 'name_ar', 'slug', 'summary', 'summary_ar', 'is_active',
     ];
 
     protected $casts = [
@@ -35,5 +35,29 @@ class Service extends Model
         return $this->belongsToMany(ProviderProfile::class, 'provider_services', 'service_id', 'provider_id')
             ->withPivot(['price_min','price_max'])
             ->withTimestamps();
+    }
+
+    /**
+     * Get localized name based on current locale
+     * AR: الاسم المترجم حسب اللغة الحالية
+     */
+    public function getLocalizedNameAttribute(): string
+    {
+        if (app()->getLocale() === 'ar' && !empty($this->name_ar)) {
+            return $this->name_ar;
+        }
+        return $this->name ?? '';
+    }
+
+    /**
+     * Get localized summary based on current locale
+     * AR: الملخص المترجم حسب اللغة الحالية
+     */
+    public function getLocalizedSummaryAttribute(): ?string
+    {
+        if (app()->getLocale() === 'ar' && !empty($this->summary_ar)) {
+            return $this->summary_ar;
+        }
+        return $this->summary;
     }
 }

@@ -24,4 +24,19 @@ return [
     'cta_title' => 'Didn\'t find what you\'re looking for?',
     'cta_desc' => 'Contact us directly and we will help you find the perfect service for your needs',
     'cta_button' => 'Contact Us Now',
+
+    // Wizard modal
+    'wizard_title'       => 'Browse Services',
+    'wizard_services'    => 'Services',
+    'wizard_details'     => 'Service Details',
+    'wizard_browse_all'  => 'Browse All Services',
+    'wizard_view_full'   => 'View Full Details →',
+    'wizard_coming_soon' => 'Coming Soon',
+    'wizard_no_providers'=> 'No providers have registered in this category yet.',
+    'wizard_be_first'    => 'Be the first to offer this service!',
+    'wizard_register'    => 'Register as Provider',
+    'choose_category'    => 'Choose Category',
+    'choose_service'     => 'Choose Service',
+    'subservices_available' => 'Sub-services available',
+    'explore'            => 'Explore',
 ];

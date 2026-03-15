@@ -5,8 +5,10 @@
             <a href="{{ route('home') }}" class="text-neutral hover:text-brand">{{ __('footer.links.home') }}</a>
             <a href="{{ route('services.index') }}"
                 class="text-neutral hover:text-brand">{{ __('footer.links.services') }}</a>
-            <a href="{{ route('providers.index') }}"
-                class="text-neutral hover:text-brand">{{ __('footer.links.providers') }}</a>
+            @auth
+                <a href="{{ route('providers.suggest') }}"
+                    class="text-neutral hover:text-brand">{{ __('footer.links.suggest_provider') }}</a>
+            @endauth
         </div>
         <div class="text-neutral text-sm">{{ __('footer.copyright', ['year' => date('Y')]) }}</div>
     </div>

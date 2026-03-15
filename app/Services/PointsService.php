@@ -45,4 +45,11 @@ class PointsService
         $spend = PointsTransaction::where('user_id', $user->id)->where('type', 'spend')->sum('points');
         return $earn - $spend;
     }
+
+    public function totalEarned(User $user): int
+    {
+        return PointsTransaction::where('user_id', $user->id)
+            ->where('type', 'earn')
+            ->sum('points');
+    }
 }

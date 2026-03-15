@@ -24,4 +24,15 @@ return [
     'cta_title' => 'Vous ne trouvez pas ce que vous cherchez ?',
     'cta_desc' => 'Contactez-nous directement et nous vous aiderons à trouver le service parfait pour vos besoins',
     'cta_button' => 'Contactez-nous maintenant',
+
+    // Wizard modal
+    'wizard_title'       => 'Parcourir les services',
+    'wizard_services'    => 'Services',
+    'wizard_details'     => 'Détails du service',
+    'wizard_browse_all'  => 'Voir tous les services',
+    'wizard_view_full'   => 'Voir les détails →',
+    'wizard_coming_soon' => 'Bientôt disponible',
+    'wizard_no_providers'=> 'Aucun prestataire inscrit dans cette catégorie pour l\'instant.',
+    'wizard_be_first'    => 'Soyez le premier à proposer ce service !',
+    'wizard_register'    => 'S\'inscrire comme prestataire',
 ];

@@ -12,12 +12,20 @@ class ProviderDirectoryFiltersTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_lists_only_approved_by_default(): void
+    /** Service-first: Accessing /providers without context should redirect to /services */
+    public function test_redirects_to_services_without_context(): void
+    {
+        $res = $this->get(route('providers.index'));
+        $res->assertRedirect(route('services.index'));
+    }
+
+    /** Service-first: With search context (q param), shows approved providers */
+    public function test_lists_only_approved_with_search_context(): void
     {
         $approved = ProviderProfile::factory()->approved()->create(['display_name' => 'Approved One']);
         $pending = ProviderProfile::factory()->pending()->create(['display_name' => 'Pending Hidden']);
 
-        $res = $this->get(route('providers.index'));
+        $res = $this->get(route('providers.index', ['q' => 'Approved']));
         $res->assertOk();
         $res->assertSee('Approved One');
         $res->assertDontSee('Pending Hidden');
@@ -32,29 +40,39 @@ class ProviderDirectoryFiltersTest extends TestCase
         $res->assertDontSee('Beta Works');
     }
 
-    public function test_city_filter(): void
+    public function test_city_filter_with_search_context(): void
     {
         ProviderProfile::factory()->approved()->create(['display_name' => 'CityA', 'city' => 'Kairouan']);
         ProviderProfile::factory()->approved()->create(['display_name' => 'CityB', 'city' => 'Sousse']);
-        $res = $this->get(route('providers.index', ['city' => 'Kairouan']));
+        // Need search or category context + city filter
+        $res = $this->get(route('providers.index', ['q' => 'City', 'city' => 'Kairouan']));
         $res->assertSee('CityA');
         $res->assertDontSee('CityB');
     }
 
-    public function test_badge_filter(): void
+    public function test_badge_filter_with_category_context(): void
     {
-        ProviderProfile::factory()->approved()->create(['display_name' => 'BronzeGuy','badge_level' => 'bronze']);
-        ProviderProfile::factory()->approved()->create(['display_name' => 'GoldGal','badge_level' => 'gold']);
-        $res = $this->get(route('providers.index', ['badge' => 'gold']));
+        $category = Category::factory()->create();
+        $service = Service::factory()->create(['category_id' => $category->id]);
+        
+        $bronzeGuy = ProviderProfile::factory()->approved()->create(['display_name' => 'BronzeGuy', 'badge_level' => 'bronze']);
+        $goldGal = ProviderProfile::factory()->approved()->create(['display_name' => 'GoldGal', 'badge_level' => 'gold']);
+        
+        // Attach both to service so they show with category context
+        $bronzeGuy->services()->attach([$service->id => ['price_min' => 10, 'price_max' => 20]]);
+        $goldGal->services()->attach([$service->id => ['price_min' => 10, 'price_max' => 20]]);
+        
+        $res = $this->get(route('providers.index', ['category' => $service->id, 'badge' => 'gold']));
         $res->assertSee('GoldGal');
         $res->assertDontSee('BronzeGuy');
     }
 
-    public function test_min_rating_filter(): void
+    public function test_min_rating_filter_with_search_context(): void
     {
-        ProviderProfile::factory()->approved()->create(['display_name' => 'LowRated','avg_rating' => 2.5]);
-        ProviderProfile::factory()->approved()->create(['display_name' => 'HighRated','avg_rating' => 4.7]);
-        $res = $this->get(route('providers.index', ['rating' => 4]));
+        ProviderProfile::factory()->approved()->create(['display_name' => 'LowRated', 'avg_rating' => 2.5]);
+        ProviderProfile::factory()->approved()->create(['display_name' => 'HighRated', 'avg_rating' => 4.7]);
+        // Use search context + rating filter
+        $res = $this->get(route('providers.index', ['q' => 'Rated', 'rating' => 4]));
         $res->assertSee('HighRated');
         $res->assertDontSee('LowRated');
     }

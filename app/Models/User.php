@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -11,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
@@ -47,6 +46,24 @@ class User extends Authenticatable implements MustVerifyEmail
     public function jobRequests()
     {
         return $this->hasMany(JobRequest::class, 'client_id');
+    }
+
+    /** Provider submissions/suggestions */
+    public function providerSubmissions()
+    {
+        return $this->hasMany(ProviderSubmission::class);
+    }
+
+    /** Points transactions */
+    public function points()
+    {
+        return $this->hasMany(PointsTransaction::class);
+    }
+
+    /** Trust score */
+    public function trust()
+    {
+        return $this->hasOne(UserTrust::class);
     }
 
     /**

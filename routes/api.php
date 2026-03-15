@@ -24,6 +24,14 @@ Route::prefix('v1')->group(function () {
     Route::get('/providers', [App\Http\Controllers\Api\V1\ProviderController::class, 'index']);
     Route::get('/providers/{username}', [App\Http\Controllers\Api\V1\ProviderController::class, 'show']);
 
+    // Wizard Flow - Social, Feed-Like Navigation
+    Route::prefix('wizard')->group(function () {
+        Route::get('/start', [App\Http\Controllers\Api\V1\WizardController::class, 'start']);
+        Route::get('/categories', [App\Http\Controllers\Api\V1\WizardController::class, 'categories']);
+        Route::get('/services', [App\Http\Controllers\Api\V1\WizardController::class, 'services']);
+        Route::get('/providers', [App\Http\Controllers\Api\V1\WizardController::class, 'providers']);
+    });
+
     // Localization & Homepage
     Route::get('/locales/{locale}', [App\Http\Controllers\Api\V1\LocalizationController::class, 'index']);
     Route::get('/home', [App\Http\Controllers\Api\V1\HomeController::class, 'index']);
@@ -45,6 +53,13 @@ Route::prefix('v1')->group(function () {
         // Community submissions
         Route::get('/me/submissions', [App\Http\Controllers\Api\V1\ProviderSubmissionController::class, 'index']);
         Route::post('/providers/submissions', [App\Http\Controllers\Api\V1\ProviderSubmissionController::class, 'store']);
+        
+        // Wizard Flow (Authenticated)
+        Route::post('/wizard/suggest', [App\Http\Controllers\Api\V1\WizardController::class, 'suggest']);
+        
+        // Rewards & Progress
+        Route::get('/rewards/{submissionId}', [App\Http\Controllers\Api\V1\RewardsController::class, 'show']);
+        Route::get('/me/progress', [App\Http\Controllers\Api\V1\RewardsController::class, 'progress']);
 
         // Me: points & trust
         Route::get('/me/points', App\Http\Controllers\Api\V1\MePointsController::class);

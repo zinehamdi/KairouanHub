@@ -1,5 +1,98 @@
-<nav x-data="{ open: false }" class="sticky top-0 z-50 border-b border-white/20 shadow-lg"
-    style="background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);">
+<nav x-data="{ open: false, howOpen: false }" class="sticky top-0 z-50 border-b border-white/10 shadow-xl"
+    style="background: linear-gradient(135deg, #1A2332 0%, #0F1419 100%);">
+
+    <!-- Luxurious How It Works Modal -->
+    <div x-show="howOpen"
+        x-transition:enter="transition ease-out duration-500"
+        x-transition:enter-start="opacity-0 backdrop-blur-0"
+        x-transition:enter-end="opacity-100 backdrop-blur-md"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100 backdrop-blur-md"
+        x-transition:leave-end="opacity-0 backdrop-blur-0"
+        @click.self="howOpen = false"
+        @keydown.escape.window="howOpen = false"
+        class="fixed inset-0 bg-brand-dark/95 z-[100] flex items-center justify-center p-4 sm:p-6"
+        style="display:none">
+        
+        <div x-show="howOpen"
+            x-transition:enter="transition ease-out duration-500 delay-100"
+            x-transition:enter-start="opacity-0 translate-y-20 scale-90"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-20 scale-90"
+            class="bg-white rounded-[3rem] shadow-[0_0_100px_rgba(0,0,0,0.5)] w-full max-w-2xl overflow-hidden relative border border-white/20"
+            style="display:none">
+            
+            <!-- Close Button -->
+            <button @click="howOpen = false" 
+                class="absolute top-6 right-6 z-10 w-12 h-12 bg-gray-100 hover:bg-brand-dark hover:text-white rounded-2xl flex items-center justify-center transition-all transform hover:rotate-90">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+
+            <div class="relative">
+                <!-- Decorative element -->
+                <div class="absolute -top-24 -left-24 w-64 h-64 bg-accent-DEFAULT/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-accent-amber/10 rounded-full blur-3xl"></div>
+
+                <div class="px-10 py-12 relative z-10">
+                    <div class="text-center mb-12">
+                        <span class="inline-block px-4 py-1.5 bg-accent-DEFAULT/10 text-accent-DEFAULT rounded-full text-xs font-black uppercase tracking-widest mb-4">Discover the Hub</span>
+                        <h2 class="text-4xl font-black text-brand-dark tracking-tighter">{{ __('nav.how_it_works') }}</h2>
+                    </div>
+
+                    <div class="space-y-10">
+                        <!-- Step 1 -->
+                        <div class="flex items-start gap-8 group">
+                            <div class="relative shrink-0">
+                                <div class="w-16 h-16 rounded-[1.5rem] bg-gradient-to-br from-brand-dark to-brand-DEFAULT flex items-center justify-center text-white font-black text-2xl shadow-2xl relative z-10 group-hover:scale-110 transition-transform duration-500">1</div>
+                                <div class="absolute -inset-2 bg-accent-DEFAULT/20 rounded-[2rem] blur-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            </div>
+                            <div class="pt-2">
+                                <h3 class="font-black text-brand-dark text-xl mb-2 group-hover:text-accent-DEFAULT transition-colors">{{ __('nav.how_step1_title') }}</h3>
+                                <p class="text-gray-500 text-lg leading-relaxed font-medium">{{ __('nav.how_step1_desc') }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="flex items-start gap-8 group">
+                            <div class="relative shrink-0">
+                                <div class="w-16 h-16 rounded-[1.5rem] bg-gradient-to-br from-accent-DEFAULT to-accent-amber flex items-center justify-center text-white font-black text-2xl shadow-2xl relative z-10 group-hover:scale-110 transition-transform duration-500">2</div>
+                                <div class="absolute -inset-2 bg-accent-amber/20 rounded-[2rem] blur-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            </div>
+                            <div class="pt-2">
+                                <h3 class="font-black text-brand-dark text-xl mb-2 group-hover:text-accent-amber transition-colors">{{ __('nav.how_step2_title') }}</h3>
+                                <p class="text-gray-500 text-lg leading-relaxed font-medium">{{ __('nav.how_step2_desc') }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="flex items-start gap-8 group">
+                            <div class="relative shrink-0">
+                                <div class="w-16 h-16 rounded-[1.5rem] bg-gradient-to-br from-accent-amber to-accent-copper flex items-center justify-center text-white font-black text-2xl shadow-2xl relative z-10 group-hover:scale-110 transition-transform duration-500">3</div>
+                                <div class="absolute -inset-2 bg-accent-copper/20 rounded-[2rem] blur-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            </div>
+                            <div class="pt-2">
+                                <h3 class="font-black text-brand-dark text-xl mb-2 group-hover:text-accent-copper transition-colors">{{ __('nav.how_step3_title') }}</h3>
+                                <p class="text-gray-500 text-lg leading-relaxed font-medium">{{ __('nav.how_step3_desc') }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-16 flex flex-col sm:flex-row gap-5">
+                        <a href="{{ route('services.index') }}" @click="howOpen = false"
+                            class="flex-[2] text-center py-5 bg-brand-dark text-white font-black rounded-2xl shadow-2xl hover:bg-accent-DEFAULT hover:text-brand-dark transition-all transform hover:-translate-y-1 active:scale-95">
+                            {{ __('nav.how_cta') }}
+                        </a>
+                        <a href="{{ route('provider.start') }}" @click="howOpen = false"
+                            class="flex-1 text-center py-5 bg-gray-100 text-brand-dark font-black rounded-2xl border-2 border-transparent hover:border-gray-200 transition-all hover:bg-white active:scale-95">
+                            {{ __('nav.how_provider_cta') }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
@@ -22,14 +115,17 @@
                         class="text-base font-medium">
                         {{ __('nav.services') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('providers.index')" :active="request()->routeIs('providers.*')"
-                        class="text-base font-medium">
-                        {{ __('nav.providers') }}
-                    </x-nav-link>
+                    <button @click="howOpen = true"
+                        class="inline-flex items-center px-3 py-1.5 text-base font-medium text-white hover:text-white/80 transition-colors">
+                        <svg class="w-4 h-4 me-1.5 rtl:ms-1.5 rtl:me-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        {{ __('nav.how_it_works') }}
+                    </button>
                     @auth
                         <x-nav-link :href="route('requests.index')" :active="request()->routeIs('requests.index')"
                             class="text-base font-medium">
-                            {{ __('Browse Requests') }}
+                            {{ __('nav.browse_requests') }}
                         </x-nav-link>
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
                             class="text-base font-medium">
@@ -37,9 +133,9 @@
                         </x-nav-link>
                     @endauth
 
-                    <!-- Become a Provider Button -->
+                    {{-- Become a Provider Button - Hide for admins/superadmins/existing providers --}}
                     @auth
-                        @if(!auth()->user()->providerProfile)
+                        @if(!auth()->user()->hasRole(['admin', 'superadmin']) && !auth()->user()->providerProfile)
                             <a href="{{ route('provider.start') }}"
                                 class="inline-flex items-center px-4 py-2.5 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-lg shadow-md transition-all duration-200 hover:shadow-lg backdrop-blur-sm border border-white/30">
                                 <svg class="w-5 h-5 mr-2 rtl:ml-2 rtl:mr-0" fill="none" stroke="currentColor"
@@ -73,7 +169,7 @@
                         <svg class="w-5 h-5 mr-1.5 rtl:ml-1.5 rtl:mr-0" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                         </svg>
                         <span class="hidden md:inline">{{ strtoupper(app()->getLocale()) }}</span>
                     </button>
@@ -134,8 +230,9 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
-                                                                                    this.closest('form').submit();">
+                                <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                                                                        this.closest('form').submit();">
                                     🚪 {{ __('nav.logout') }}
                                 </x-dropdown-link>
                             </form>
@@ -182,12 +279,16 @@
             <x-responsive-nav-link :href="route('services.index')" :active="request()->routeIs('services.*')">
                 {{ __('nav.services') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('providers.index')" :active="request()->routeIs('providers.*')">
-                {{ __('nav.providers') }}
-            </x-responsive-nav-link>
+            <button @click="howOpen = true; open = false"
+                class="w-full text-start flex items-center gap-2 px-4 py-2 text-white/90 hover:bg-white/10 rounded-lg transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                {{ __('nav.how_it_works') }}
+            </button>
             @auth
                 <x-responsive-nav-link :href="route('requests.index')" :active="request()->routeIs('requests.index')">
-                    {{ __('Browse Requests') }}
+                    {{ __('nav.browse_requests') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     {{ __('nav.dashboard') }}
@@ -198,7 +299,7 @@
         <!-- Language Switcher (Mobile) -->
         <div class="pt-4 pb-3 border-t border-white/20 bg-gradient-to-b from-transparent to-black/10">
             <div class="px-4">
-                <div class="text-sm font-medium text-white/70 mb-2">{{ __('Language') }}</div>
+                <div class="text-sm font-medium text-white/70 mb-2">{{ __('common.language') }}</div>
                 <div class="space-y-1">
                     <a href="{{ route('lang.switch', 'ar') }}"
                         class="flex items-center px-3 py-2 rounded-lg text-white transition @if(app()->getLocale() === 'ar') bg-white/20 font-semibold @else hover:bg-white/10 @endif">
@@ -239,8 +340,9 @@
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
-                                                                            this.closest('form').submit();">
+                        <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                                                                                this.closest('form').submit();">
                             🚪 {{ __('nav.logout') }}
                         </x-responsive-nav-link>
                     </form>

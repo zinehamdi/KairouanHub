@@ -9,6 +9,33 @@ return [
     'browse_services' => 'Parcourir les services',
     'find_providers' => 'Trouver des prestataires',
     'become_provider' => 'Devenir prestataire',
+    'badge_kairouan' => 'La plateforme de services de Kairouan',
+    
+    // Quick Actions
+    'quick_actions_title' => 'Que souhaitez-vous faire ?',
+    'request_service' => 'Demander un service',
+    'request_service_desc' => 'Dites-nous ce dont vous avez besoin',
+    'find_provider' => 'Trouver un professionnel',
+    'find_provider_desc' => 'Trouvez l\'artisan qui vous convient',
+    'suggest_provider' => 'Suggérer quelqu\'un de confiance',
+    'suggest_provider_desc' => 'Recommandez un prestataire de confiance',
+    'browse_all' => 'Tout parcourir',
+    'browse_all_desc' => 'Parcourir tous les services',
+    'explore_services' => 'Explorer les services',
+    'explore_services_desc' => 'Découvrez les services et trouvez des professionnels de confiance',
+    
+    // Featured Section
+    'featured_providers' => 'Prestataires recommandés',
+    'featured_providers_desc' => 'Prestataires de confiance de notre communauté',
+    'categories_title' => 'Services',
+    'view_all' => 'Voir tout',
+    'no_rating' => 'Nouveau',
+    
+    // Community Feed
+    'community_feed' => 'Dernières demandes',
+    'community_feed_desc' => 'Voyez ce que les gens recherchent',
+    'posted_by' => 'Par',
+    'time_ago' => 'Il y a :time',
     
     // Why Choose Us Section
     'why_choose_us' => 'Pourquoi choisir KairouanHub ?',
@@ -33,6 +60,10 @@ return [
     // CTA Section
     'cta_title' => 'Commencez maintenant avec KairouanHub',
     'cta_description' => 'Rejoignez la communauté numérique de Kairouan et obtenez les services dont vous avez besoin facilement',
-    'request_service' => 'Demander un service maintenant',
     'join_as_provider' => 'Rejoindre comme prestataire',
+    
+    // Trust badges
+    'verified' => 'Vérifié',
+    'top_rated' => 'Meilleures notes',
+    'jobs_done' => 'Travaux effectués',
 ];

@@ -1,17 +1,24 @@
 <?php
 return [
-    'created' => 'تم الإنشاء بنجاح.',
-    'updated' => 'تم التحديث بنجاح.',
-    'deleted' => 'تم الحذف بنجاح.',
-    'confirm_delete' => 'هل أنت متأكد؟',
-    'no_results' => 'لا توجد نتائج.',
-    'saved' => 'تم الحفظ بنجاح',
-    'uploaded' => 'تم الرفع بنجاح',
-    'review_pending' => 'سيتم مراجعة ملفك الشخصي من قبل المسؤولين.',
-    'logged_in' => 'أنت مسجل الدخول!',
+    // Success messages - friendly, social tone
+    'created' => 'تم إنشاؤه بنجاح',
+    'updated' => 'تم تحديثه',
+    'deleted' => 'تم حذفه',
+    'saved' => 'تم الحفظ',
+    'uploaded' => 'تم الرفع',
+    
+    // Confirmations - natural, reassuring
+    'confirm_delete' => 'متأكد تحذف هذا؟',
+    
+    // Status messages
+    'no_results' => 'ما لقيناش نتائج',
+    'review_pending' => 'ملفك رانا نتحققوا منه قريباً',
+    'logged_in' => 'مرحباً بك!',
+    
+    // Descriptions - simple, friendly
     'request_service_desc' => 'ابدأ طلب خدمة جديد',
-    'my_requests_desc' => 'عرض جميع طلباتك',
-    'browse_services_desc' => 'اكتشف الخدمات المتاحة',
-    'become_provider_desc' => 'انضم إلى شبكة المحترفين في القيروان واحصل على المزيد من العملاء',
+    'my_requests_desc' => 'شوف كل طلباتك',
+    'browse_services_desc' => 'استكشف الخدمات المتاحة',
+    'become_provider_desc' => 'انضم للمجتمع واحصل على عملاء أكثر',
     'start_now' => 'ابدأ الآن',
 ];

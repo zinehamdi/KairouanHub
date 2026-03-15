@@ -20,9 +20,12 @@ class NewProviderPendingApproval extends Notification
 
     public function toMail($notifiable): MailMessage
     {
+        $name = $this->profile->display_name;
+        
         return (new MailMessage)
-            ->subject('New Provider Profile Pending Approval')
-            ->line('A new provider profile requires review: '.$this->profile->display_name)
-            ->action('Admin Panel', url('/admin'));
+            ->subject('مزود جديد محتاج مراجعة')
+            ->line("{$name} سجل في KairouanHub وحابب ينضم للمجتمع.")
+            ->line('راجع ملفه وقبل أو ارفض.')
+            ->action('لوحة التحكم', url('/admin'));
     }
 }

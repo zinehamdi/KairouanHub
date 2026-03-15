@@ -63,10 +63,9 @@ class OnboardingFlowTest extends TestCase
         $this->assertNotEmpty($profile->fresh()->photos_json);
         $this->assertTrue(Storage::disk('public')->exists($profile->fresh()->photos_json[0]));
 
-        // Dashboard accessible
+        // Dashboard route redirects to main dashboard
         $dash = $this->get(route('provider.dashboard'));
-        $dash->assertOk();
-        $dash->assertSee('My Studio');
+        $dash->assertRedirect(route('dashboard'));
     }
 
     public function test_auto_approved_skips_pending_logic(): void

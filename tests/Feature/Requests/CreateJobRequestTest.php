@@ -55,7 +55,7 @@ class CreateJobRequestTest extends TestCase
             $this->assertStringContainsString('requests/'.$client->id, $p);
         }
         
-        // Assert notification sent to matching provider
-        Notification::assertSentTo($profile, NewJobRequestNotification::class);
+        // Assert notification sent to matching provider (sent to User, not ProviderProfile)
+        Notification::assertSentTo($providerUser, NewJobRequestNotification::class);
     }
 }

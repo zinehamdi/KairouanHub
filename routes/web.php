@@ -13,6 +13,8 @@ use App\Http\Controllers\ServiceController as PublicServiceController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\ProviderController as AdminProviderController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\SubmissionController as AdminSubmissionController;
 use Spatie\Permission\Middleware\RoleMiddleware;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\ChatbotController;
@@ -53,6 +55,10 @@ Route::middleware(['auth'])->group(function () {
     // Provider Gallery Management
     Route::post('/provider/gallery/upload', [ProviderOnboardingController::class, 'uploadGalleryPhotos'])->name('provider.gallery.upload');
     Route::delete('/provider/gallery/{index}', [ProviderOnboardingController::class, 'deleteGalleryPhoto'])->name('provider.gallery.delete');
+    
+    // Provider Suggestion (suggest a trusted provider)
+    Route::get('/suggest-provider', [\App\Http\Controllers\ProviderSuggestionController::class, 'create'])->name('providers.suggest');
+    Route::post('/suggest-provider', [\App\Http\Controllers\ProviderSuggestionController::class, 'store'])->name('providers.suggest.store');
 });
 // Health check
 Route::get('/healthz', [HomeController::class, 'healthz']);
@@ -69,7 +75,7 @@ Route::get('/dashboard', function () {
         }
     }
     return view('dashboard', compact('profile'));
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 
 Route::middleware(['auth', 'throttle:20,1'])->group(function () {
@@ -96,17 +102,50 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/offers/{id}/accept', [OfferController::class, 'accept'])->name('offers.accept');
 });
 
-// Admin routes — مشرف
+
+// Superadmin routes — مدير عام
+Route::prefix('superadmin')
+    ->as('superadmin.')
+    ->middleware(['auth', RoleMiddleware::class . ':superadmin'])
+    ->group(function () {
+        // Superadmin dashboard and platform management
+        Route::get('/dashboard', [AdminDashboardController::class, 'superadmin'])->name('dashboard');
+        
+        // Admin management
+        Route::post('/admins', [AdminDashboardController::class, 'addAdmin'])->name('admins.store');
+        Route::delete('/admins/{user}', [AdminDashboardController::class, 'removeAdmin'])->name('admins.destroy');
+        
+        // Platform settings
+        Route::post('/settings', [AdminDashboardController::class, 'updateSettings'])->name('settings.update');
+        
+        // Google Maps import
+        Route::post('/google-places/search', [AdminDashboardController::class, 'googlePlacesSearch'])->name('google-places.search');
+        Route::post('/google-places/import', [AdminDashboardController::class, 'importProviders'])->name('google-places.import');
+    });
+
+// Admin routes — مشرف (accessible by admin OR superadmin)
 Route::prefix('admin')
     ->as('admin.')
-    ->middleware(['auth', RoleMiddleware::class . ':admin'])
+    ->middleware(['auth', RoleMiddleware::class . ':admin|superadmin'])
     ->group(function () {
-        Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::resource('categories', AdminCategoryController::class);
         Route::resource('services', AdminServiceController::class);
+        
+        // Google Maps Import (must be BEFORE resource route to avoid conflict)
+        Route::get('providers/map-import', [AdminProviderController::class, 'mapImport'])->name('providers.map-import');
+        Route::post('providers/map-import/search', [AdminProviderController::class, 'searchFromMap'])->name('providers.map-search');
+        Route::post('providers/map-import/confirm', [AdminProviderController::class, 'confirmImport'])->name('providers.confirm-import');
+        
+        // Providers resource (after specific routes)
         Route::resource('providers', AdminProviderController::class);
         Route::post('providers/{provider}/approve', [AdminProviderController::class, 'approve'])->name('providers.approve');
         Route::post('providers/{provider}/reject', [AdminProviderController::class, 'reject'])->name('providers.reject');
+        
+        // Provider submissions/suggestions
+        Route::get('submissions', [AdminSubmissionController::class, 'index'])->name('submissions.index');
+        Route::post('submissions/{submission}/approve', [AdminSubmissionController::class, 'approve'])->name('submissions.approve');
+        Route::post('submissions/{submission}/reject', [AdminSubmissionController::class, 'reject'])->name('submissions.reject');
     });
 
 // Chatbot endpoints (session-scoped, rate limited)
