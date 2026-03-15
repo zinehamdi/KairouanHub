@@ -5,7 +5,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'KairouanHub') }} - {{ __('seo.home_subtitle') }}</title>
+    <meta name="description" content="{{ __('seo.home_description') }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:title" content="{{ config('app.name', 'KairouanHub') }} - {{ __('seo.home_subtitle') }}" />
+    <meta property="og:description" content="{{ __('seo.home_description') }}" />
+    <meta property="og:image" content="{{ asset('images/og-image.png') }}" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="{{ url()->current() }}" />
+    <meta property="twitter:title" content="{{ config('app.name', 'KairouanHub') }} - {{ __('seo.home_subtitle') }}" />
+    <meta property="twitter:description" content="{{ __('seo.home_description') }}" />
+    <meta property="twitter:image" content="{{ asset('images/og-image.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

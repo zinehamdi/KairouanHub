@@ -5,9 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title_prefix', __('seo.home_title')) - @yield('title_suffix', __('seo.home_subtitle'))</title>
-    <meta name="description"
-        content="@yield('description', __('seo.home_description', ['app_name' => config('app.name')]))">
+    <title>@yield('title', config('app.name', 'KairouanHub')) - {{ __('seo.home_subtitle') }}</title>
+    <meta name="description" content="@yield('description', __('seo.home_description'))">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -15,7 +18,7 @@
     <meta property="og:title" content="@yield('og_title', View::getSection('title', config('app.name')))" />
     <meta property="og:description"
         content="@yield('og_description', View::getSection('description', __('seo.home_description', ['app_name' => config('app.name')])))" />
-    <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))" />
+    <meta property="og:image" content="@yield('og_image', asset('images/og-image.png'))" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -23,7 +26,7 @@
     <meta property="twitter:title" content="@yield('og_title', View::getSection('title', config('app.name')))" />
     <meta property="twitter:description"
         content="@yield('og_description', View::getSection('description', __('seo.home_description', ['app_name' => config('app.name')])))" />
-    <meta property="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))" />
+    <meta property="twitter:image" content="@yield('og_image', asset('images/og-image.png'))" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
